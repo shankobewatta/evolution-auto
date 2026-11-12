@@ -381,6 +381,18 @@ main > section.on:not([hidden]){display:block!important}
 #tabs button:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
 @media(max-width:560px){#tabs{overflow-x:auto;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}#tabs button{flex:1 0 auto;min-width:calc((100% - 18px)/4)}}
 
+
+/* Reliable full-page layout + native glass navigation. No JS section hiding. */
+html{scroll-behavior:smooth;scroll-padding-top:100px}
+main>section,main>section[hidden],main>section.on{display:block!important;visibility:visible!important;height:auto!important;max-height:none!important;overflow:visible!important}
+main>section{scroll-margin-top:100px}
+#tabs{display:flex!important;position:sticky;top:10px;z-index:100;gap:8px;align-items:center;justify-content:space-between;width:min(1128px,calc(100% - 28px));margin:0 auto 22px;padding:9px;border:1px solid color-mix(in srgb,var(--ac) 30%,var(--bd));border-radius:18px;background:rgba(10,20,40,.72);-webkit-backdrop-filter:blur(24px) saturate(160%);backdrop-filter:blur(24px) saturate(160%);box-shadow:0 14px 42px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.16)}
+:root[data-theme="light"] #tabs{background:rgba(255,255,255,.82)}
+#tabs .glass-tab{display:flex;flex:1;align-items:center;justify-content:center;min-width:0;padding:12px 10px;border:1px solid transparent;border-radius:12px;color:var(--mut);background:transparent;text-decoration:none;text-align:center;font:inherit;font-size:12px;font-weight:800;letter-spacing:.025em;white-space:nowrap;transition:background .2s,color .2s,transform .2s}
+#tabs .glass-tab:hover{color:var(--tx);background:color-mix(in srgb,var(--ac) 12%,transparent);transform:translateY(-1px)}
+#tabs .glass-tab.on,#tabs .glass-tab:focus-visible{color:var(--acx);background:linear-gradient(120deg,var(--ac),#54d9d0);outline:none;box-shadow:0 7px 22px color-mix(in srgb,var(--ac) 25%,transparent)}
+@media(max-width:560px){#tabs{width:calc(100% - 18px);gap:4px;padding:6px;top:6px}#tabs .glass-tab{padding:10px 5px;font-size:10px;white-space:normal;line-height:1.2}}
+
 </style>
 </head>
 <body>\n<div class="auto-atmosphere" aria-hidden="true">
@@ -406,7 +418,7 @@ main > section.on:not([hidden]){display:block!important}
     <div class="hero-copy"><div class="eyebrow">THE EVOLUTION OWNER EXPERIENCE</div><h1>YOUR DRIVE.<br><span>YOUR WORLD.</span></h1><p>A considered ownership experience. Your vehicle, care schedule and support — all in one place.</p><div class="hero-kicker"><span class="pulse-dot"></span> CONNECTED OWNERSHIP · SRI LANKA</div></div>
   </div>
 </header>
-<nav id="tabs" aria-label="Owner dashboard navigation"></nav>
+<nav id="tabs" aria-label="Owner dashboard navigation"><a class="glass-tab on" href="#gar" data-t="gar">My Garage</a><a class="glass-tab" href="#faq" data-t="faq">Vehicle Care</a><a class="glass-tab" href="#chg" data-t="chg">Charging</a><a class="glass-tab" href="#emergency" data-t="emergency">Emergency</a></nav>
 <main>
 <section id="gar">
   <div class="card">
@@ -640,43 +652,16 @@ $("resetVehicle").addEventListener("click",()=>{$("vm").value="";$("customModel"
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-/* Accessible glass tab navigation — EV Buddy remains in its separate floating launcher. */
+/* Glass section navigation: native anchors keep navigation working even if other JS fails. */
 const TABS=[["gar","My Garage"],["faq","Vehicle Care"],["chg","Charging"],["emergency","Emergency"]];
 const tabsNav=$("tabs");
 tabsNav.setAttribute("aria-label","Owner dashboard navigation");
-tabsNav.setAttribute("role","tablist");
-tabsNav.innerHTML=TABS.map(([id,label],i)=>`<button type="button" role="tab" id="tab-${id}" aria-controls="${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-t="${id}" class="${i===0?"on":""}>${label}</button>`).join("");
-function show(id,moveFocus=false){
-  if(!TABS.some(([tabId])=>tabId===id))id="gar";
-  document.querySelectorAll("main > section").forEach(panel=>{
-    const active=panel.id===id;
-    panel.classList.toggle("on",active);
-    panel.hidden=!active;
-    panel.setAttribute("aria-hidden",String(!active));
-  });
-  tabsNav.querySelectorAll('[role="tab"]').forEach(button=>{
-    const active=button.dataset.t===id;
-    button.classList.toggle("on",active);
-    button.setAttribute("aria-selected",String(active));
-    button.tabIndex=active?0:-1;
-    if(active&&moveFocus)button.focus({preventScroll:true});
-  });
-  if(window.scrollY>tabsNav.getBoundingClientRect().top+window.scrollY-16)
-    window.scrollTo({top:Math.max(0,tabsNav.getBoundingClientRect().top+window.scrollY-16),behavior:"smooth"});
-}
+tabsNav.innerHTML=TABS.map(([id,label],i)=>`<a class="glass-tab${i===0?" on":""}" href="#${id}" data-t="${id}">${label}</a>`).join("");
 tabsNav.addEventListener("click",e=>{
-  const button=e.target.closest("button[data-t]");
-  if(button&&tabsNav.contains(button))show(button.dataset.t);
+  const link=e.target.closest("a[data-t]");
+  if(!link)return;
+  tabsNav.querySelectorAll("a[data-t]").forEach(a=>a.classList.toggle("on",a===link));
 });
-tabsNav.addEventListener("keydown",e=>{
-  if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
-  const buttons=[...tabsNav.querySelectorAll('[role="tab"]')];
-  const current=buttons.indexOf(document.activeElement);
-  const next=e.key==="Home"?0:e.key==="End"?buttons.length-1:(current+(e.key==="ArrowRight"?1:-1)+buttons.length)%buttons.length;
-  e.preventDefault();show(buttons[next].dataset.t,true);
-});
-show("gar");
-
 /* Common issues */
 const FAQ=[
 ["range battery drain less distance","Range is lower than expected","Range drops with high speed, heavy A/C use, cold or very hot weather, low tyre pressure and extra load. Check tyre pressure, use eco mode and pre-condition the cabin while plugged in. If range falls suddenly or the battery warning shows, book a battery health check."],
