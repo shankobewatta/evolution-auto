@@ -125,9 +125,11 @@ a{color:var(--ac)}
 /* Cinematic garage experience */
 .cinematic-header{max-width:1320px;padding:18px 34px 22px}
 .cinematic-header .topline{margin-bottom:20px}
-.cinematic-hero{min-height:245px;grid-template-columns:1fr .95fr;gap:36px}
-.cinematic-hero h1{font-size:clamp(44px,6.4vw,76px);letter-spacing:-.065em;line-height:.91;margin:17px 0}
-.cinematic-hero p{font-size:15px;max-width:440px;line-height:1.75}
+.cinematic-hero{min-height:270px;grid-template-columns:1fr;gap:0;align-items:center;position:relative}
+.cinematic-hero:after{content:"";position:absolute;left:0;bottom:0;width:min(520px,72%);height:1px;background:linear-gradient(90deg,var(--ac),transparent);opacity:.55}
+.cinematic-hero .hero-copy{max-width:820px;position:relative;z-index:1;padding:12px 0 28px}
+.cinematic-hero h1{font-size:clamp(48px,7.5vw,88px);letter-spacing:-.075em;line-height:.9;margin:19px 0}
+.cinematic-hero p{font-size:15px;max-width:520px;line-height:1.8}
 .hero-kicker{display:flex;align-items:center;gap:9px;margin-top:22px;font-size:9px;letter-spacing:.18em;font-weight:800;color:var(--mut)}
 .pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 13px var(--ac)}
 .cinematic-art{height:230px;border-radius:4px 24px 4px 24px;background:radial-gradient(ellipse at 65% 60%,rgba(182,243,74,.16),transparent 45%),linear-gradient(120deg,rgba(255,255,255,.02),transparent 55%),var(--card);border-color:color-mix(in srgb,var(--ac) 24%,var(--bd))}
@@ -159,7 +161,7 @@ main{max-width:1250px;padding:0 16px 70px}
 #gar> .card:not(:first-child){border-radius:4px 16px 4px 16px;padding:22px 26px}
 #gar> .card:not(:first-child) h3{font-size:19px}
 #help.on{display:block}#help .card:first-child{margin-bottom:14px}
-@media(max-width:700px){.cinematic-header{padding:15px 17px 20px}.cinematic-hero{grid-template-columns:1fr;gap:20px;min-height:auto}.cinematic-hero h1{font-size:clamp(43px,12vw,62px)}.cinematic-art{height:155px}.hero-orbit{width:100px;height:100px}.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:235px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}#gar .card:first-child:before{display:none}#gar> .card:not(:first-child){padding:17px}}
+@media(max-width:700px){.cinematic-header{padding:15px 17px 20px}.cinematic-hero{grid-template-columns:1fr;gap:20px;min-height:auto}.cinematic-hero h1{font-size:clamp(43px,12vw,62px)}.cinematic-hero{min-height:230px}.cinematic-hero .hero-copy{padding:8px 0 24px}.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:235px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}#gar .card:first-child:before{display:none}#gar> .card:not(:first-child){padding:17px}}
 
 .vehicle-placeholder{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:25px;color:var(--mut);background:radial-gradient(ellipse at center,color-mix(in srgb,var(--ac) 10%,transparent),transparent 62%)}.vehicle-placeholder[hidden]{display:none}.placeholder-mark{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--ac);border-radius:14px;color:var(--ac);font-size:22px;font-weight:900;box-shadow:var(--glow)}.vehicle-placeholder strong{font-size:10px;letter-spacing:.2em;color:var(--tx)}.vehicle-placeholder small{font-size:11px;max-width:220px}\n</style>
 </head>
@@ -170,8 +172,7 @@ main{max-width:1250px;padding:0 16px 70px}
     <div class="head-actions"><span class="live-tag">● ELECTRIC MOBILITY</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme"><span id="themeIcon">☼</span><span id="themeLabel">Light mode</span></button></div>
   </div>
   <div class="hero cinematic-hero">
-    <div><div class="eyebrow">THE EVOLUTION OWNER EXPERIENCE</div><h1>YOUR DRIVE.<br><span>YOUR WORLD.</span></h1><p>A considered ownership experience. Your vehicle, care schedule and support — all in one place.</p><div class="hero-kicker"><span class="pulse-dot"></span> CONNECTED OWNERSHIP · SRI LANKA</div></div>
-    <div class="hero-art cinematic-art" aria-hidden="true"><span class="art-label">EVOLUTION AUTO / PRIVATE GARAGE</span><span class="art-code">EA—01</span><div class="hero-orbit"></div><span class="hero-foot">ENGINEERED FOR WHAT'S NEXT</span></div>
+    <div class="hero-copy"><div class="eyebrow">THE EVOLUTION OWNER EXPERIENCE</div><h1>YOUR DRIVE.<br><span>YOUR WORLD.</span></h1><p>A considered ownership experience. Your vehicle, care schedule and support — all in one place.</p><div class="hero-kicker"><span class="pulse-dot"></span> CONNECTED OWNERSHIP · SRI LANKA</div></div>
   </div>
 </header>
 <nav id="tabs"></nav>
