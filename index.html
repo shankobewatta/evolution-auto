@@ -163,7 +163,48 @@ main{max-width:1250px;padding:0 16px 70px}
 #help.on{display:block}#help .card:first-child{margin-bottom:14px}
 @media(max-width:700px){.cinematic-header{padding:15px 17px 20px}.cinematic-hero{grid-template-columns:1fr;gap:20px;min-height:auto}.cinematic-hero h1{font-size:clamp(43px,12vw,62px)}.cinematic-hero{min-height:230px}.cinematic-hero .hero-copy{padding:8px 0 24px}.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:235px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}#gar .card:first-child:before{display:none}#gar> .card:not(:first-child){padding:17px}}
 
-.vehicle-placeholder{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:25px;color:var(--mut);background:radial-gradient(ellipse at center,color-mix(in srgb,var(--ac) 10%,transparent),transparent 62%)}.vehicle-placeholder[hidden]{display:none}.placeholder-mark{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--ac);border-radius:14px;color:var(--ac);font-size:22px;font-weight:900;box-shadow:var(--glow)}.vehicle-placeholder strong{font-size:10px;letter-spacing:.2em;color:var(--tx)}.vehicle-placeholder small{font-size:11px;max-width:220px}\n</style>
+.vehicle-placeholder{position:absolute;z-index:2;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;text-align:center;padding:25px;color:var(--mut);background:radial-gradient(ellipse at center,color-mix(in srgb,var(--ac) 10%,transparent),transparent 62%)}.vehicle-placeholder[hidden]{display:none}.placeholder-mark{width:48px;height:48px;display:grid;place-items:center;border:1px solid var(--ac);border-radius:14px;color:var(--ac);font-size:22px;font-weight:900;box-shadow:var(--glow)}.vehicle-placeholder strong{font-size:10px;letter-spacing:.2em;color:var(--tx)}.vehicle-placeholder small{font-size:11px;max-width:220px}\n
+/* EVOLUTION AUTO / electric blue visual refresh */
+:root{color-scheme:dark;--bg:#070d1b;--bg2:#0c1730;--card:rgba(14,27,52,.72);--card2:rgba(17,35,65,.82);--tx:#f4f8ff;--mut:#9aacc8;--ac:#39b8ff;--ac2:#168de0;--acx:#061426;--bd:rgba(91,183,255,.22);--warn:#ffc66d;--bad:#ff647c;--ok:#53e2bd;--shadow:0 20px 60px rgba(0,0,0,.28);--glow:0 0 34px rgba(57,184,255,.17);--grid:rgba(76,164,255,.055)}
+:root[data-theme="light"]{color-scheme:light;--bg:#edf4ff;--bg2:#e3edfb;--card:rgba(255,255,255,.76);--card2:rgba(245,249,255,.9);--tx:#10213d;--mut:#60728e;--ac:#087fce;--ac2:#0569ad;--acx:#fff;--bd:rgba(8,127,206,.2);--shadow:0 18px 48px rgba(26,63,111,.1);--glow:0 0 28px rgba(8,127,206,.12);--grid:rgba(8,127,206,.05)}
+body{background:radial-gradient(ellipse at 85% 0%,rgba(39,155,255,.18),transparent 35%),radial-gradient(ellipse at 8% 38%,rgba(74,95,255,.08),transparent 32%),linear-gradient(145deg,var(--bg),var(--bg2))}
+body:before{background-size:54px 54px;opacity:.8}
+.brandmark{border-radius:13px 5px 13px 5px;background:linear-gradient(145deg,rgba(57,184,255,.18),transparent)}
+.brandname span,.eyebrow,.hero-kicker{color:var(--ac)}
+.pulse-dot{background:var(--ac);box-shadow:0 0 16px var(--ac);animation:signalPulse 1.8s ease-in-out infinite}
+@keyframes signalPulse{50%{box-shadow:0 0 4px var(--ac),0 0 22px var(--ac)}}
+nav{top:12px;border:1px solid rgba(135,196,255,.25);border-radius:18px;background:rgba(8,20,42,.58);backdrop-filter:blur(24px) saturate(165%);-webkit-backdrop-filter:blur(24px) saturate(165%);box-shadow:0 14px 42px rgba(0,0,0,.2),inset 0 1px rgba(255,255,255,.09);padding:8px}
+:root[data-theme="light"] nav{background:rgba(255,255,255,.68)}
+nav button{border-radius:12px;min-height:43px}
+nav button.on{background:linear-gradient(120deg,#39b8ff,#5b8cff);color:#041326;border-color:transparent;box-shadow:0 7px 22px rgba(57,184,255,.26)}
+.card{border-color:var(--bd);background:linear-gradient(145deg,color-mix(in srgb,var(--card) 94%,transparent),color-mix(in srgb,var(--card2) 90%,transparent));backdrop-filter:blur(18px) saturate(135%);-webkit-backdrop-filter:blur(18px) saturate(135%);border-radius:19px}
+.btn{background:linear-gradient(115deg,#39b8ff,#5c8cff);border-color:transparent;color:#061426;box-shadow:0 7px 20px rgba(30,142,230,.16)}
+.btn.s{background:rgba(57,184,255,.07);border-color:var(--bd);color:var(--ac);box-shadow:none}
+.chip:hover,.theme-toggle:hover{border-color:var(--ac);box-shadow:var(--glow)}
+.vehicle-stage{background:radial-gradient(ellipse at 50% 70%,rgba(57,184,255,.22),transparent 58%),linear-gradient(145deg,var(--bg2),var(--card2))}
+.vehicle-stage:after{background:var(--ac)}
+.vehicle-specs span{color:var(--ac)}
+.cinematic-hero:after{background:linear-gradient(90deg,var(--ac),transparent)}
+#gar .card:first-child{background:linear-gradient(125deg,color-mix(in srgb,var(--ac) 9%,var(--card)),var(--card) 55%)}
+#log{min-height:210px}
+.evbuddy-head{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.evbuddy-avatar{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:linear-gradient(145deg,#39b8ff,#586dff);color:#041426;font-size:21px;box-shadow:0 8px 24px rgba(57,184,255,.24)}
+.evbuddy-status{font-size:10px;color:var(--ok);letter-spacing:.12em;font-weight:850;text-transform:uppercase}
+.emergency-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.emergency-link{display:flex;flex-direction:column;gap:6px;padding:17px;border:1px solid var(--bd);border-radius:16px;background:linear-gradient(145deg,var(--card2),transparent);text-decoration:none;color:var(--tx);transition:transform .22s,border-color .22s,box-shadow .22s}
+.emergency-link:hover{transform:translateY(-4px);border-color:var(--ac);box-shadow:var(--glow)}
+.emergency-link strong{font-size:22px;letter-spacing:-.04em;color:var(--ac)}
+.emergency-link span{font-size:11px;color:var(--mut)}
+.emergency-link.urgent{border-color:rgba(255,100,124,.4)}
+.emergency-link.urgent strong{color:var(--bad)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .65s ease,transform .65s cubic-bezier(.2,.7,.2,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.emergency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:700px){nav{top:6px;margin:0 9px 15px;gap:5px;border-radius:15px}nav button{min-width:108px;flex:0 0 auto;padding:10px 12px}.emergency-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.cinematic-header{padding-left:18px;padding-right:18px}}
+@media(max-width:430px){.emergency-grid{grid-template-columns:1fr 1fr}.emergency-link{padding:13px}.emergency-link strong{font-size:19px}.send{align-items:stretch}.send input{min-width:0}}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pulse-dot{animation:none}}
+
+</style>
 </head>
 <body>
 <header class="cinematic-header">
@@ -227,6 +268,10 @@ main{max-width:1250px;padding:0 16px 70px}
 </section>
 
 <section id="help">
+  <div class="card">
+    <div class="evbuddy-head"><div class="evbuddy-avatar">⚡</div><div><h3 style="font-size:21px;margin:0">EV Buddy</h3><div class="evbuddy-status">Your electric mobility companion</div></div></div>
+    <p class="mut" style="margin:0">Ask about charging, range, dashboard alerts, maintenance, EV ownership and everyday vehicle questions.</p>
+  </div>
   <div class="card sos"><b>Safety first:</b> <span class="mut">if you see smoke, smell burning, or have been in an accident, stop, switch off, move everyone away from the vehicle and call emergency services (118/119) before anything else.</span></div>
   <div class="card">
     <div id="log" aria-live="polite"></div>
@@ -237,6 +282,32 @@ main{max-width:1250px;padding:0 16px 70px}
   <div class="card"><h3>Need a person?</h3>
     <p class="mut" style="margin:0 0 8px">Reach the Evolution Auto team for anything the assistant can’t solve.</p>
     <a class="btn" href="tel:0744112132">Call 074 411 2132</a>
+  </div>
+</section>
+
+<section id="emergency">
+  <div class="card sos"><b>In immediate danger?</b> <span class="mut">Move to a safe place and contact the relevant emergency service first. EV Buddy and Evolution Auto are not emergency dispatch services.</span></div>
+  <div class="card">
+    <div class="eyebrow">SRI LANKA · QUICK DIAL</div><h3 style="font-size:24px;margin:10px 0 6px">Emergency assistance</h3>
+    <p class="mut">Tap a number to call. Numbers are listed from Sri Lankan public emergency-service information.</p>
+    <div class="emergency-grid">
+      <a class="emergency-link urgent" href="tel:119"><span>POLICE EMERGENCY</span><strong>119</strong><span>Police assistance</span></a>
+      <a class="emergency-link urgent" href="tel:1990"><span>SUWA SERIYA</span><strong>1990</strong><span>Island-wide ambulance</span></a>
+      <a class="emergency-link urgent" href="tel:110"><span>FIRE & RESCUE</span><strong>110</strong><span>Fire and rescue</span></a>
+      <a class="emergency-link" href="tel:117"><span>DISASTER MANAGEMENT</span><strong>117</strong><span>Disaster assistance</span></a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">VEHICLE SUPPORT</div><h3 style="font-size:22px;margin:10px 0 6px">Need roadside or owner support?</h3>
+    <p class="mut">For Evolution Auto owner support, call the number currently listed on this website. For a breakdown, share your location and vehicle model with the support team.</p>
+    <div class="row"><a class="btn" href="tel:0744112132">Call Evolution Auto</a><a class="btn s" target="_blank" rel="noopener" href="https://www.google.com/maps/search/vehicle+repair+near+me">Find nearby vehicle help</a></div>
+  </div>
+  <div class="card">
+    <div class="eyebrow">USEFUL LOCATIONS</div><h3 style="font-size:22px;margin:10px 0 6px">Find help around you</h3>
+    <div class="rem"><span><b>Nearby hospitals</b><br><span class="mut">Open Google Maps using your location</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/hospital+near+me">Find</a></div>
+    <div class="rem"><span><b>Nearby police stations</b><br><span class="mut">Open Google Maps using your location</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/police+station+near+me">Find</a></div>
+    <div class="rem"><span><b>EV charging stations</b><br><span class="mut">Find public charging locations</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/EV+charging+station+near+me">Find</a></div>
+    <div class="rem"><span><b>Tyre and repair shops</b><br><span class="mut">Find nearby automotive services</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/tyre+repair+near+me">Find</a></div>
   </div>
 </section>
 
@@ -358,7 +429,7 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* Tabs */
-const TABS=[["gar","My garage"],["help","AI assistant"],["faq","Vehicle care"],["chg","Charging"]];
+const TABS=[["gar","My garage"],["help","EV Buddy"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
 $("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
 function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id))}
 $("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
@@ -378,8 +449,8 @@ const FAQ=[
 function renderFaq(){const q=$("fs").value.toLowerCase();$("fl").innerHTML=FAQ.filter(f=>!q||(f[0]+f[1]+f[2]).toLowerCase().includes(q)).map(f=>`<details><summary>${f[1]}</summary><p class="mut">${f[2]}</p></details>`).join("")||'<p class="mut">No match. Try the AI assistant.</p>'}
 $("fs").oninput=renderFaq;renderFaq();
 
-/* AI chat (uses Claude through the page runtime; falls back to the FAQ) */
-let S=null;(async()=>{try{if(window.claude)S=await claude.use("sample")}catch(e){}$("note").textContent=S?"AI assistant is on. Replies are guidance only; for safety issues call the team.":"AI assistant isn’t available here, so answers come from the common-issues list."})();
+/* EV Buddy preview: local owner-care knowledge until a secure AI backend is connected. */
+let S=null;$("note").textContent="EV Buddy knowledge preview is active. Full conversational AI will be enabled through a secure backend connection.";
 const hist=[];
 const SYS="You are the Evolution Auto owner-care assistant for Sri Lanka. Evolution Auto distributes electric vehicles (Avatr, IM Motors, XPENG, Riddara, KYC, King Long) plus Ather, Revolt and Mahindra two- and three-wheelers. Help owners with EV problems: give a short, clear diagnosis and numbered steps they can safely try. Never advise opening high-voltage components or anything unsafe. For smoke, burning smell, accidents, brake or steering failure, tell them to stop safely, leave the vehicle and call emergency services, then the team on "+PHONE+". If unsure or the fix needs a technician, recommend booking service rather than guessing. Do not invent prices or warranty terms. Keep answers under 150 words.";
 function add(c,t){const d=document.createElement("div");d.className="m "+c;d.textContent=t;$("log").appendChild(d);$("log").scrollTop=1e9;return d}
@@ -417,6 +488,17 @@ $("sa").onclick=()=>{const w=$("sw").value.trim(),d=$("sd").value;if(!w||!d)retu
  const v=store.get("ea_v",{});if(!v.last||d>v.last){v.last=d;if($("so").value||a[0].o)v.odo=a[0].o||v.odo;store.set("ea_v",v);load()}renderSvc()};
 $("sl").onclick=e=>{if(e.target.dataset.a==="del"){e.preventDefault();const a=store.get("ea_s",[]);a.splice(+e.target.dataset.i,1);store.set("ea_s",a);renderSvc()}};
 setupVehiclePicker();load();renderSvc();
+
+/* Lightweight scroll reveal; content remains visible when motion is reduced. */
+try{
+ const revealTargets=[...document.querySelectorAll("section .card")];
+ revealTargets.forEach(el=>el.classList.add("reveal"));
+ if("IntersectionObserver" in window){
+  const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){entry.target.classList.add("visible");observer.unobserve(entry.target)}}),{threshold:.08});
+  revealTargets.forEach(el=>observer.observe(el));
+ }else revealTargets.forEach(el=>el.classList.add("visible"));
+}catch(e){}
+
 </script>
 </body>
 </html>
