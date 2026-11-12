@@ -316,7 +316,7 @@ function renderVehicle(){
  const photo=$("vehiclePhoto"),placeholder=$("vehiclePlaceholder");const renderId=++vehicleRenderId;photo.hidden=true;photo.removeAttribute("src");placeholder.hidden=false;placeholder.querySelector("strong").textContent=m.photo?"LOADING VEHICLE IMAGE":"PHOTOGRAPHY COMING SOON";placeholder.querySelector("small").textContent=m.photo?"Preparing your vehicle showcase…":"A verified image for this model will be added soon.";if(m.photo){resolveVehiclePhoto(m.photo).then(url=>{if(renderId!==vehicleRenderId)return;if(url){photo.src=url;photo.alt=m.name+" vehicle image";photo.hidden=false;placeholder.hidden=true}else{placeholder.querySelector("strong").textContent="IMAGE UNAVAILABLE";placeholder.querySelector("small").textContent="Please refresh to try loading the vehicle photo again."}}).catch(()=>{if(renderId===vehicleRenderId){placeholder.querySelector("strong").textContent="IMAGE UNAVAILABLE";placeholder.querySelector("small").textContent="Please refresh to try loading the vehicle photo again."}})}
  $("vehicleSpecs").innerHTML=m.features.map(x=>"<span>"+x+"</span>").join("");
  $("vehiclePersonal").innerHTML='<div class="mini"><b>Charging & energy</b><span>'+m.charge+'</span></div><div class="mini"><b>Maintenance</b><span>'+m.care+'</span></div><div class="mini"><b>Owner support</b><span>'+m.support+'</span></div>';
- $("vehicleVisual").className="vehicle-visual "+m.type;
+
 }
 $("vm").addEventListener("change",renderVehicle);
 $("customModel").addEventListener("input",renderVehicle);
