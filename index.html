@@ -337,7 +337,24 @@ a{color:var(--ac)}
 .buddy-call{font-size:11px;text-align:center;text-decoration:none;color:var(--ac);font-weight:800}
 @media(max-width:700px){.evbuddy-launcher-wrap{right:15px;bottom:15px}.evbuddy-launcher{width:60px;height:60px;border-radius:20px}.buddy-hint{display:none}.evbuddy-panel{right:10px;bottom:85px;width:calc(100vw - 20px);max-height:calc(100dvh - 105px)}.auto-atmosphere{opacity:.48}}
 @media(prefers-reduced-motion:reduce){.evbuddy-panel.open{animation:none}.evbuddy-launcher{transition:none}}
-\n</style>
+\n
+/* SCROLL RECOVERY: keep the document and active section in normal page flow */
+html, body {
+  height: auto !important;
+  min-height: 100% !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+body { position: relative !important; }
+header, nav, main, section, section.on {
+  height: auto !important;
+  max-height: none !important;
+}
+main, section.on { overflow: visible !important; }
+section.on { min-height: 1px; }
+.reveal { opacity: 1 !important; transform: none !important; }
+
+</style>
 </head>
 <body>\n<div class="auto-atmosphere" aria-hidden="true">
  <svg viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice">
