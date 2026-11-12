@@ -121,35 +121,109 @@ a{color:var(--ac)}
 .vehicle-personal .mini span{font-size:11px;color:var(--mut)}
 @media(max-width:700px){.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:215px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}}
 
+
+/* Cinematic garage experience */
+.cinematic-header{max-width:1320px;padding:18px 34px 22px}
+.cinematic-header .topline{margin-bottom:20px}
+.cinematic-hero{min-height:245px;grid-template-columns:1fr .95fr;gap:36px}
+.cinematic-hero h1{font-size:clamp(44px,6.4vw,76px);letter-spacing:-.065em;line-height:.91;margin:17px 0}
+.cinematic-hero p{font-size:15px;max-width:440px;line-height:1.75}
+.hero-kicker{display:flex;align-items:center;gap:9px;margin-top:22px;font-size:9px;letter-spacing:.18em;font-weight:800;color:var(--mut)}
+.pulse-dot{width:7px;height:7px;border-radius:50%;background:var(--ac);box-shadow:0 0 13px var(--ac)}
+.cinematic-art{height:230px;border-radius:4px 24px 4px 24px;background:radial-gradient(ellipse at 65% 60%,rgba(182,243,74,.16),transparent 45%),linear-gradient(120deg,rgba(255,255,255,.02),transparent 55%),var(--card);border-color:color-mix(in srgb,var(--ac) 24%,var(--bd))}
+.cinematic-art:before{width:76%;height:105px;right:7%;bottom:43px;border:0;border-bottom:2px solid var(--ac);border-radius:52% 48% 15% 12%;transform:skewX(-19deg);box-shadow:0 18px 34px rgba(182,243,74,.14);filter:drop-shadow(0 0 9px rgba(182,243,74,.4))}
+.cinematic-art:after{width:90%;height:80px;right:3%;bottom:16px;border-top:1px solid var(--ac);opacity:.2}
+.hero-orbit{position:absolute;right:14%;top:12%;width:150px;height:150px;border:1px solid var(--bd);border-radius:50%;box-shadow:0 0 70px rgba(182,243,74,.07),inset 0 0 40px rgba(182,243,74,.04)}
+.hero-orbit:after{content:'';position:absolute;inset:20px;border:1px dashed var(--bd);border-radius:50%}
+.cinematic-art .art-label{letter-spacing:.24em}.cinematic-art .hero-foot{letter-spacing:.22em}
+nav{max-width:1250px;border-radius:4px 14px 4px 14px}
+main{max-width:1250px;padding:0 16px 70px}
+#gar .card:first-child{padding:clamp(18px,3vw,34px);border-radius:4px 22px 4px 22px;background:linear-gradient(125deg,color-mix(in srgb,var(--ac) 5%,var(--card)),var(--card) 45%);overflow:hidden}
+#gar .card:first-child:before{content:'GARAGE / 01';position:absolute;right:26px;top:25px;color:var(--mut);font-size:9px;letter-spacing:.2em;font-weight:850;opacity:.65}
+#gar .card:first-child>.eyebrow{font-size:9px;letter-spacing:.24em}
+#gar .card:first-child>h3{font-size:clamp(25px,3.5vw,38px)!important;letter-spacing:-.05em;margin-top:13px!important}
+.vehicle-picker{grid-template-columns:minmax(260px,.7fr) minmax(0,1.3fr);gap:24px;margin-top:22px}
+.vehicle-meta{gap:13px}
+.vehicle-meta h3{font-size:clamp(25px,3.5vw,38px)}
+.vehicle-stage{min-height:340px;border-radius:4px 18px 4px 18px;background:radial-gradient(ellipse at 52% 72%,color-mix(in srgb,var(--ac) 23%,transparent),transparent 56%),linear-gradient(135deg,var(--bg2),var(--card2));box-shadow:inset 0 0 60px rgba(0,0,0,.12)}
+.vehicle-stage:after{bottom:47px;width:65%;height:26px;filter:blur(28px);opacity:.25}
+.vehicle-photo{width:98%;height:90%;object-fit:contain;cursor:grab;user-select:none;touch-action:pan-y;transition:filter .25s}
+.vehicle-photo:active{cursor:grabbing}
+.vehicle-stage .stage-label,.vehicle-stage .stage-code{font-size:9px;letter-spacing:.2em}
+.vehicle-copy{padding-top:8px}
+#vehicleTitle{font-size:clamp(28px,4vw,44px)!important;letter-spacing:-.055em}
+#vehicleDescription{max-width:650px;line-height:1.7}
+.vehicle-specs span{font-size:9px;letter-spacing:.12em;padding:7px 11px}
+.vehicle-personal .mini{padding:16px;border-radius:4px 13px 4px 13px;min-height:88px}
+.vehicle-personal .mini b{font-size:12px;letter-spacing:.02em}
+#gar> .card:not(:first-child){border-radius:4px 16px 4px 16px;padding:22px 26px}
+#gar> .card:not(:first-child) h3{font-size:19px}
+#help.on{display:block}#help .card:first-child{margin-bottom:14px}
+@media(max-width:700px){.cinematic-header{padding:15px 17px 20px}.cinematic-hero{grid-template-columns:1fr;gap:20px;min-height:auto}.cinematic-hero h1{font-size:clamp(43px,12vw,62px)}.cinematic-art{height:155px}.hero-orbit{width:100px;height:100px}.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:235px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}#gar .card:first-child:before{display:none}#gar> .card:not(:first-child){padding:17px}}
 </style>
 </head>
 <body>
-<header>
+<header class="cinematic-header">
   <div class="topline">
-    <a class="brand" href="#" aria-label="Evolution Auto home">
-      <span class="brandmark">E</span>
-      <span class="brandname">EVOLUTION<span>A U T O</span></span>
-    </a>
-    <div class="head-actions">
-      <span class="live-tag">● ELECTRIC MOBILITY</span>
-      <button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme"><span id="themeIcon">☼</span><span id="themeLabel">Light mode</span></button>
-    </div>
+    <a class="brand" href="#" aria-label="Evolution Auto home"><span class="brandmark">E</span><span class="brandname">EVOLUTION<span>A U T O</span></span></a>
+    <div class="head-actions"><span class="live-tag">● ELECTRIC MOBILITY</span><button class="theme-toggle" id="themeToggle" type="button" aria-label="Switch colour theme"><span id="themeIcon">☼</span><span id="themeLabel">Light mode</span></button></div>
   </div>
-  <div class="hero">
-    <div>
-      <div class="eyebrow">OWNER EXPERIENCE · 01</div>
-      <h1>OWN THE<br><span>FUTURE.</span></h1>
-      <p>Your connected space for vehicle care, EV support, charging and smarter ownership.</p>
-    </div>
-    <div class="hero-art" aria-hidden="true">
-      <span class="art-label">EVOLUTION / DESIGN SYSTEM</span><span class="art-code">EA—01</span>
-      <span class="art-wheel two"></span><span class="art-wheel"></span>
-      <span class="hero-foot">ENGINEERED FOR WHAT'S NEXT</span>
-    </div>
+  <div class="hero cinematic-hero">
+    <div><div class="eyebrow">THE EVOLUTION OWNER EXPERIENCE</div><h1>YOUR DRIVE.<br><span>YOUR WORLD.</span></h1><p>A considered ownership experience. Your vehicle, care schedule and support — all in one place.</p><div class="hero-kicker"><span class="pulse-dot"></span> CONNECTED OWNERSHIP · SRI LANKA</div></div>
+    <div class="hero-art cinematic-art" aria-hidden="true"><span class="art-label">EVOLUTION AUTO / PRIVATE GARAGE</span><span class="art-code">EA—01</span><div class="hero-orbit"></div><span class="hero-foot">ENGINEERED FOR WHAT'S NEXT</span></div>
   </div>
 </header>
 <nav id="tabs"></nav>
 <main>
+<section id="gar">
+  <div class="card">
+    <div class="eyebrow">YOUR EVOLUTION AUTO</div>
+    <h3 style="font-size:21px;margin:8px 0 4px">Your vehicle. Your experience.</h3>
+    <p class="mut" style="margin:0 0 12px">Choose the vehicle you own to personalise your dashboard and support experience.</p>
+    <div class="vehicle-picker">
+      <div class="vehicle-meta">
+        <label for="vm">Select your vehicle</label>
+        <select id="vm" aria-label="Choose your Evolution Auto vehicle">
+          <option value="">Choose your vehicle…</option>
+        </select>
+        <input id="customModel" placeholder="Enter your vehicle model" style="display:none">
+        <div class="mut" id="vehicleHint">Choose your vehicle to open your personal garage.</div>
+        <div class="vehicle-actions"><button class="btn" id="applyVehicle" type="button">Personalise my app</button><button class="btn s" id="resetVehicle" type="button">Change vehicle</button></div>
+      </div>
+      <div class="vehicle-stage" aria-label="Vehicle showcase">
+        <span class="stage-label">YOUR VEHICLE / SHOWCASE</span><span class="stage-code" id="vehicleCode">EA / SELECT</span>
+        <img class="vehicle-photo" id="vehiclePhoto" alt="Selected vehicle preview" hidden><div class="vehicle-visual" id="vehicleVisual"><div class="vehicle-body"></div><div class="vehicle-cabin"></div><div class="vehicle-wheel rear"></div><div class="vehicle-wheel front"></div><div class="vehicle-light"></div></div>
+      </div>
+    </div>
+    <div class="vehicle-meta vehicle-copy" style="margin-top:14px">
+      <h3 id="vehicleTitle">Select your Evolution Auto vehicle</h3>
+      <p class="mut" id="vehicleDescription">Your ownership space will adapt to the vehicle you choose.</p>
+      <div class="vehicle-specs" id="vehicleSpecs"><span>PERSONALISED CARE</span><span>EV SUPPORT</span></div>
+    </div>
+    <div class="vehicle-personal" id="vehiclePersonal">
+      <div class="mini"><b>Charging & energy</b><span>Vehicle-specific charging guidance</span></div>
+      <div class="mini"><b>Maintenance</b><span>Service reminders for your vehicle</span></div>
+      <div class="mini"><b>Owner support</b><span>Relevant help and care information</span></div>
+    </div>
+  </div>
+  <div class="card"><h3>Upcoming &amp; due</h3><div id="rem" class="mut">Add your details below to see reminders.</div></div>
+  <div class="card"><h3>My vehicle</h3>
+    <div><label>Registration no.</label><input id="vr"></div>
+    <div class="row"><div><label>Purchase date</label><input type="date" id="vp"></div><div><label>Warranty ends</label><input type="date" id="vw"></div></div>
+    <div class="row"><div><label>Last service date</label><input type="date" id="vl"></div><div><label>Service every (months)</label><input type="number" id="vi" min="1" value="6"></div></div>
+    <div class="row"><div><label>Insurance expiry</label><input type="date" id="vn"></div><div><label>Revenue licence expiry</label><input type="date" id="vv"></div></div>
+    <div class="row"><div><label>Odometer (km)</label><input type="number" id="vo"></div><div><label>Home charger installed</label><select id="vc"><option>No</option><option>Yes</option></select></div></div>
+    <label>Notes</label><textarea id="vt" rows="2"></textarea>
+    <p><button class="btn" id="vs">Save details</button> <span class="mut" id="vmsg"></span></p>
+  </div>
+  <div class="card"><h3>Service history</h3>
+    <div class="row"><div><label>Date</label><input type="date" id="sd"></div><div><label>Odometer (km)</label><input type="number" id="so"></div></div>
+    <label>Work done</label><input id="sw" placeholder="e.g. Periodic service, tyre rotation">
+    <p><button class="btn" id="sa">Add entry</button></p><div id="sl"></div>
+    <p class="mut">Records are saved privately in this browser on this device only.</p>
+  </div>
+</section>
+
 <section id="help">
   <div class="card sos"><b>Safety first:</b> <span class="mut">if you see smoke, smell burning, or have been in an accident, stop, switch off, move everyone away from the vehicle and call emergency services (118/119) before anything else.</span></div>
   <div class="card">
@@ -185,54 +259,7 @@ a{color:var(--ac)}
   </div>
 </section>
 
-<section id="gar">
-  <div class="card">
-    <div class="eyebrow">YOUR EVOLUTION AUTO</div>
-    <h3 style="font-size:21px;margin:8px 0 4px">Your vehicle. Your experience.</h3>
-    <p class="mut" style="margin:0 0 12px">Choose the vehicle you own to personalise your dashboard and support experience.</p>
-    <div class="vehicle-picker">
-      <div class="vehicle-meta">
-        <label for="vm">Select your vehicle</label>
-        <select id="vm" aria-label="Choose your Evolution Auto vehicle">
-          <option value="">Choose your vehicle…</option>
-        </select>
-        <input id="customModel" placeholder="Enter your vehicle model" style="display:none">
-        <div class="mut" id="vehicleHint">Your selected model will appear here.</div>
-        <div class="vehicle-actions"><button class="btn" id="applyVehicle" type="button">Personalise my app</button><button class="btn s" id="resetVehicle" type="button">Change vehicle</button></div>
-      </div>
-      <div class="vehicle-stage" aria-label="Stylised 3D vehicle preview">
-        <span class="stage-label">3D VEHICLE PREVIEW</span><span class="stage-code" id="vehicleCode">EA / SELECT</span>
-        <img class="vehicle-photo" id="vehiclePhoto" alt="Selected vehicle preview" hidden><div class="vehicle-visual" id="vehicleVisual"><div class="vehicle-body"></div><div class="vehicle-cabin"></div><div class="vehicle-wheel rear"></div><div class="vehicle-wheel front"></div><div class="vehicle-light"></div></div>
-      </div>
-    </div>
-    <div class="vehicle-meta" style="margin-top:14px">
-      <h3 id="vehicleTitle">Select your Evolution Auto vehicle</h3>
-      <p class="mut" id="vehicleDescription">Your ownership space will adapt to the vehicle you choose.</p>
-      <div class="vehicle-specs" id="vehicleSpecs"><span>PERSONALISED CARE</span><span>EV SUPPORT</span></div>
-    </div>
-    <div class="vehicle-personal" id="vehiclePersonal">
-      <div class="mini"><b>Charging & energy</b><span>Vehicle-specific charging guidance</span></div>
-      <div class="mini"><b>Maintenance</b><span>Service reminders for your vehicle</span></div>
-      <div class="mini"><b>Owner support</b><span>Relevant help and care information</span></div>
-    </div>
-  </div>
-  <div class="card"><h3>Upcoming &amp; due</h3><div id="rem" class="mut">Add your details below to see reminders.</div></div>
-  <div class="card"><h3>My vehicle</h3>
-    <div><label>Registration no.</label><input id="vr"></div>
-    <div class="row"><div><label>Purchase date</label><input type="date" id="vp"></div><div><label>Warranty ends</label><input type="date" id="vw"></div></div>
-    <div class="row"><div><label>Last service date</label><input type="date" id="vl"></div><div><label>Service every (months)</label><input type="number" id="vi" min="1" value="6"></div></div>
-    <div class="row"><div><label>Insurance expiry</label><input type="date" id="vn"></div><div><label>Revenue licence expiry</label><input type="date" id="vv"></div></div>
-    <div class="row"><div><label>Odometer (km)</label><input type="number" id="vo"></div><div><label>Home charger installed</label><select id="vc"><option>No</option><option>Yes</option></select></div></div>
-    <label>Notes</label><textarea id="vt" rows="2"></textarea>
-    <p><button class="btn" id="vs">Save details</button> <span class="mut" id="vmsg"></span></p>
-  </div>
-  <div class="card"><h3>Service history</h3>
-    <div class="row"><div><label>Date</label><input type="date" id="sd"></div><div><label>Odometer (km)</label><input type="number" id="so"></div></div>
-    <label>Work done</label><input id="sw" placeholder="e.g. Periodic service, tyre rotation">
-    <p><button class="btn" id="sa">Add entry</button></p><div id="sl"></div>
-    <p class="mut">Records are saved privately in this browser on this device only.</p>
-  </div>
-</section>
+
 </main>
 
 <script>
@@ -300,10 +327,10 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* Tabs */
-const TABS=[["help","Ask AI"],["faq","Common issues"],["chg","Charging"],["gar","My garage"]];
+const TABS=[["gar","My garage"],["help","AI assistant"],["faq","Vehicle care"],["chg","Charging"]];
 $("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
 function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id))}
-$("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("help");
+$("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
 
 /* Common issues */
 const FAQ=[
