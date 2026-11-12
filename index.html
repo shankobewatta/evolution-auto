@@ -353,7 +353,28 @@ header, nav, main, section, section.on {
 main, section.on { overflow: visible !important; }
 section.on { min-height: 1px; }
 .reveal { opacity: 1 !important; transform: none !important; }
-section, section.on { display: block !important; }
+/* GLASS NAVIGATION */
+#tabs{
+ position:sticky;top:10px;z-index:50;
+ width:min(1128px,calc(100% - 28px));margin:0 auto 22px;padding:9px;
+ display:flex;align-items:center;gap:8px;
+ border:1px solid color-mix(in srgb,var(--ac) 24%,var(--bd));
+ border-radius:18px;
+ background:color-mix(in srgb,var(--card) 76%,transparent);
+ -webkit-backdrop-filter:blur(24px) saturate(155%);
+ backdrop-filter:blur(24px) saturate(155%);
+ box-shadow:0 12px 36px rgba(0,0,0,.13),inset 0 1px 0 rgba(255,255,255,.16);
+}
+#tabs button{
+ flex:1;min-width:0;padding:12px 14px;border:1px solid transparent;border-radius:12px;
+ background:transparent;color:var(--mut);font:inherit;font-size:12px;font-weight:800;
+ letter-spacing:.035em;white-space:nowrap;cursor:pointer;transition:background .25s,color .25s,border-color .25s,transform .25s,box-shadow .25s;
+}
+#tabs button:hover{color:var(--tx);background:color-mix(in srgb,var(--ac) 9%,transparent);transform:translateY(-1px)}
+#tabs button.on{color:var(--acx);background:linear-gradient(135deg,var(--ac),color-mix(in srgb,var(--ac) 72%,#fff 28%));border-color:color-mix(in srgb,var(--ac) 70%,#fff 30%);box-shadow:0 6px 20px color-mix(in srgb,var(--ac) 25%,transparent),inset 0 1px 0 rgba(255,255,255,.28)}
+@media(max-width:560px){#tabs{width:calc(100% - 18px);gap:5px;padding:6px}#tabs button{padding:10px 7px;font-size:10px}}
+
+/* Tab mode: show only the selected dashboard panel. */
 
 </style>
 </head>
@@ -617,7 +638,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 /* Tabs */
 const TABS=[["gar","My garage"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
 $("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
-function show(id){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));const target=document.getElementById(id);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})}
+function show(id){document.querySelectorAll("main > section").forEach(panel=>panel.classList.toggle("on",panel.id===id));document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));window.scrollTo({top:0,behavior:"smooth"})}
 $("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
 
 /* Common issues */
