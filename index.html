@@ -295,9 +295,64 @@ a{color:var(--ac)}
 @media(max-width:700px){.cinematic-header:before{width:270px;height:270px;right:-130px;top:30px}.cinematic-header:after{right:-12%;top:115px;width:75vw;opacity:.48}}
 @media(prefers-reduced-motion:reduce){body:after,.cinematic-header:before{animation:none}}
 
-</style>
+
+/* Automotive atmosphere, maintenance planner and floating EV Buddy */
+.auto-atmosphere{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;opacity:.9}
+.auto-atmosphere svg{width:100%;height:100%;filter:drop-shadow(0 0 15px rgba(167,139,250,.1))}
+.auto-atmosphere:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,var(--bg) 0%,transparent 20%,transparent 78%,var(--bg) 100%),linear-gradient(180deg,transparent 45%,var(--bg) 100%)}
+:root[data-theme="light"] .auto-atmosphere{opacity:.58}
+.maintenance-card,.appointment-card{position:relative;overflow:hidden}
+.maintenance-card:after,.appointment-card:after{content:"";position:absolute;right:-38px;top:-42px;width:155px;height:155px;border:1px solid var(--bd);border-radius:50%;box-shadow:0 0 0 18px color-mix(in srgb,var(--ac) 4%,transparent),0 0 0 40px color-mix(in srgb,var(--ac) 3%,transparent);pointer-events:none}
+#customReminders,#appointmentList{margin-top:12px}
+.planner-item{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 0;border-top:1px solid var(--bd)}
+.planner-item strong{display:block;color:var(--tx)}
+.planner-item small{display:block;color:var(--mut);font-size:11px}
+.planner-actions{display:flex;gap:7px;flex-wrap:wrap}
+.planner-actions button{font:inherit;font-size:11px;padding:7px 10px;border:1px solid var(--bd);border-radius:9px;background:var(--card2);color:var(--ac);cursor:pointer}
+.evbuddy-launcher-wrap{position:fixed;right:24px;bottom:24px;z-index:1000;display:flex;align-items:center;gap:10px}
+.evbuddy-launcher{position:relative;width:68px;height:68px;border:1px solid color-mix(in srgb,var(--ac) 65%,white);border-radius:23px;background:linear-gradient(145deg,var(--ac),#54d9d0);box-shadow:0 12px 35px color-mix(in srgb,var(--ac) 32%,transparent),inset 0 1px rgba(255,255,255,.6);cursor:pointer;display:grid;place-items:center;transition:transform .25s}
+.evbuddy-launcher:hover{transform:translateY(-5px) rotate(-4deg)}
+.buddy-car{position:relative;display:block;width:43px;height:23px;margin-top:8px;border:2px solid #17112c;border-radius:13px 14px 8px 8px;background:linear-gradient(180deg,#fff 0 43%,#b9eaff 44% 100%);box-shadow:inset 0 -4px rgba(30,40,70,.12)}
+.buddy-car:before{content:"";position:absolute;left:9px;top:-10px;width:23px;height:12px;border:2px solid #17112c;border-bottom:0;border-radius:12px 12px 0 0;background:#c9edff}
+.buddy-car:after{content:"";position:absolute;left:4px;bottom:-5px;width:8px;height:8px;border:2px solid #17112c;border-radius:50%;background:#34304b;box-shadow:25px 0 #34304b,25px 0 0 2px #17112c}
+.buddy-eye{position:absolute;z-index:2;top:-1px;width:4px;height:6px;border-radius:50%;background:#17112c}
+.buddy-eye.left{left:14px}.buddy-eye.right{right:14px}
+.buddy-smile{position:absolute;z-index:2;left:17px;top:7px;width:10px;height:5px;border-bottom:1.8px solid #17112c;border-radius:0 0 10px 10px}
+.buddy-online{position:absolute;right:5px;top:5px;width:11px;height:11px;border-radius:50%;background:#42f0a4;border:2px solid #17112c}
+.buddy-hint{font-size:11px;font-weight:800;color:var(--tx);background:var(--card);border:1px solid var(--bd);padding:8px 11px;border-radius:99px;box-shadow:var(--shadow)}
+.evbuddy-panel{position:fixed;right:24px;bottom:105px;z-index:1001;width:min(390px,calc(100vw - 28px));max-height:min(650px,calc(100vh - 135px));display:none;flex-direction:column;gap:11px;padding:15px;border:1px solid var(--bd);border-radius:22px;background:color-mix(in srgb,var(--card) 96%,transparent);backdrop-filter:blur(24px);box-shadow:0 24px 80px rgba(0,0,0,.34)}
+.evbuddy-panel.open{display:flex;animation:buddyPop .22s ease-out}
+@keyframes buddyPop{from{opacity:0;transform:translateY(12px) scale(.97)}to{opacity:1;transform:none}}
+.evbuddy-panel-head{display:flex;align-items:center;gap:11px}
+.evbuddy-panel-head strong{font-size:16px}
+.evbuddy-close{margin-left:auto;width:34px;height:34px;border:1px solid var(--bd);border-radius:11px;background:var(--card2);color:var(--tx);font-size:23px;cursor:pointer}
+.evbuddy-avatar{display:grid;place-items:center;width:46px;height:46px;border-radius:15px;background:linear-gradient(145deg,var(--ac),#54d9d0)}
+.mini-car{transform:scale(.72)}
+.evbuddy-safety{font-size:10px;line-height:1.45;color:var(--mut);padding:9px 10px;border-radius:11px;background:color-mix(in srgb,var(--warn) 9%,var(--card2))}
+.evbuddy-panel #log{min-height:125px;max-height:260px;overflow:auto;padding:4px}
+.evbuddy-panel .send{display:flex;gap:8px}
+.evbuddy-panel .send input{min-width:0;flex:1}
+.evbuddy-panel .chips{display:flex;flex-wrap:wrap;gap:6px}
+.evbuddy-panel .chip{font-size:10px;padding:6px 8px}
+.buddy-call{font-size:11px;text-align:center;text-decoration:none;color:var(--ac);font-weight:800}
+@media(max-width:700px){.evbuddy-launcher-wrap{right:15px;bottom:15px}.evbuddy-launcher{width:60px;height:60px;border-radius:20px}.buddy-hint{display:none}.evbuddy-panel{right:10px;bottom:85px;width:calc(100vw - 20px);max-height:calc(100dvh - 105px)}.auto-atmosphere{opacity:.48}}
+@media(prefers-reduced-motion:reduce){.evbuddy-panel.open{animation:none}.evbuddy-launcher{transition:none}}
+\n</style>
 </head>
-<body>
+<body>\n<div class="auto-atmosphere" aria-hidden="true">
+ <svg viewBox="0 0 1200 760" preserveAspectRatio="xMidYMid slice">
+  <defs><linearGradient id="carGlow" x1="0" x2="1"><stop stop-color="#a78bfa" stop-opacity=".08"/><stop offset=".55" stop-color="#55e6d0" stop-opacity=".2"/><stop offset="1" stop-color="#a78bfa" stop-opacity=".04"/></linearGradient></defs>
+  <g fill="none" stroke="url(#carGlow)" stroke-width="2">
+   <path d="M80 245 L155 226 L220 168 Q250 140 302 140 L460 140 Q500 142 540 183 L605 230 L730 247 Q760 252 775 283 L780 315 L64 315 L66 276 Q68 254 80 245Z"/>
+   <path d="M235 169 L460 169 Q492 170 524 208 L560 232 L190 232Z"/>
+   <circle cx="205" cy="315" r="48"/><circle cx="205" cy="315" r="26"/><circle cx="650" cy="315" r="48"/><circle cx="650" cy="315" r="26"/>
+   <circle cx="1010" cy="520" r="115"/><circle cx="1010" cy="520" r="83"/><circle cx="1010" cy="520" r="16"/>
+   <path d="M1010 405V437 M1125 520H1093 M1010 635V603 M895 520H927 M929 439L952 462 M1091 601L1068 578 M1091 439L1068 462 M929 601L952 578"/>
+   <path d="M770 95h120l18 18v120l-18 18H770l-18-18V113z M790 145h80 M790 174h55 M790 203h68"/>
+  </g>
+  <g fill="#a78bfa" opacity=".24"><circle cx="80" cy="420" r="3"/><circle cx="840" cy="300" r="3"/><circle cx="560" cy="650" r="2"/></g>
+ </svg>
+</div>
 <header class="cinematic-header">
   <div class="topline">
     <a class="brand" href="#" aria-label="Evolution Auto home"><span class="brandmark">E</span><span class="brandname">EVOLUTION<span>A U T O</span></span></a>
@@ -340,6 +395,25 @@ a{color:var(--ac)}
       <div class="mini"><b>Owner support</b><span>Relevant help and care information</span></div>
     </div>
   </div>
+  <div class="card maintenance-card">
+    <div class="eyebrow">OWNER CARE · PLANNER</div><h3>Maintenance reminders</h3>
+    <p class="mut">Create dated reminders for tyres, battery checks, servicing and other vehicle care.</p>
+    <div class="row"><div><label for="mrName">Maintenance task</label><input id="mrName" placeholder="e.g. Tyre rotation"></div><div><label for="mrDate">Due date</label><input id="mrDate" type="date"></div></div>
+    <div class="row"><div><label for="mrType">Category</label><select id="mrType"><option>Periodic service</option><option>Battery health check</option><option>Tyres & alignment</option><option>Brake inspection</option><option>Air conditioning</option><option>Other maintenance</option></select></div><div><label for="mrOdo">Odometer target (optional)</label><input id="mrOdo" type="number" min="0" placeholder="e.g. 25000"></div></div>
+    <label for="mrNotes">Notes (optional)</label><input id="mrNotes" placeholder="Parts, symptoms or details">
+    <p><button class="btn" id="addReminder" type="button">＋ Add reminder</button> <button class="btn s" id="enableNotices" type="button">Enable notifications</button></p>
+    <div id="customReminders"></div>
+    <p class="mut" id="reminderStatus">Reminders are stored on this device. Browser alerts work while this website is open; add important dates to your calendar too.</p>
+  </div>
+  <div class="card appointment-card">
+    <div class="eyebrow">SERVICE BOOKING · PLANNER</div><h3>Plan a service appointment</h3>
+    <p class="mut">Choose your preferred service slot and save it to your calendar. This is a planning request, not a confirmed Evolution Auto booking.</p>
+    <div class="row"><div><label for="apService">Service required</label><select id="apService"><option>Periodic maintenance</option><option>Battery health inspection</option><option>Tyre & wheel alignment</option><option>Brake inspection</option><option>Charging system check</option><option>General diagnosis</option></select></div><div><label for="apDate">Preferred date</label><input id="apDate" type="date"></div></div>
+    <div class="row"><div><label for="apTime">Preferred time</label><input id="apTime" type="time" value="10:00"></div><div><label for="apPhone">Contact number</label><input id="apPhone" type="tel" placeholder="Your phone number"></div></div>
+    <label for="apNotes">Additional details</label><textarea id="apNotes" rows="2" placeholder="Vehicle model, registration or issue…"></textarea>
+    <p><button class="btn" id="saveAppointment" type="button">Save appointment & add to calendar</button></p>
+    <div id="appointmentList"></div><p class="mut" id="appointmentStatus">Contact Evolution Auto to confirm availability and the appointment.</p>
+  </div>
   <div class="card"><h3>Upcoming &amp; due</h3><div id="rem" class="mut">Add your details below to see reminders.</div></div>
   <div class="card"><h3>My vehicle</h3>
     <div><label>Registration no.</label><input id="vr"></div>
@@ -358,23 +432,28 @@ a{color:var(--ac)}
   </div>
 </section>
 
-<section id="help">
-  <div class="card">
-    <div class="evbuddy-head"><div class="evbuddy-avatar">⚡</div><div><h3 style="font-size:21px;margin:0">EV Buddy</h3><div class="evbuddy-status">Your electric mobility companion</div></div></div>
-    <p class="mut" style="margin:0">Ask about charging, range, dashboard alerts, maintenance, EV ownership and everyday vehicle questions.</p>
+</main>
+<div class="evbuddy-launcher-wrap" aria-label="EV Buddy assistant">
+  <button class="evbuddy-launcher" id="evbuddyToggle" type="button" aria-label="Open EV Buddy chat" aria-expanded="false">
+    <span class="buddy-car" aria-hidden="true"><i class="buddy-eye left"></i><i class="buddy-eye right"></i><i class="buddy-smile"></i></span>
+    <span class="buddy-online"></span>
+  </button>
+  <span class="buddy-hint">Need a hand?</span>
+</div>
+<aside class="evbuddy-panel" id="evbuddyPanel" aria-label="EV Buddy chat" aria-hidden="true">
+  <div class="evbuddy-panel-head">
+    <div class="evbuddy-avatar"><span class="buddy-car mini-car"><i class="buddy-eye left"></i><i class="buddy-eye right"></i><i class="buddy-smile"></i></span></div>
+    <div><strong>EV Buddy</strong><div class="evbuddy-status">Your electric mobility companion</div></div>
+    <button class="evbuddy-close" id="evbuddyClose" type="button" aria-label="Close EV Buddy">×</button>
   </div>
-  <div class="card sos"><b>Safety first:</b> <span class="mut">if you see smoke, smell burning, or have been in an accident, stop, switch off, move everyone away from the vehicle and call emergency services (118/119) before anything else.</span></div>
-  <div class="card">
-    <div id="log" aria-live="polite"></div>
-    <div class="chips" id="chips"></div>
-    <div class="send"><input id="q" placeholder="Describe the problem with your vehicle…" autocomplete="off"><button class="btn" id="go">Send</button></div>
-    <p class="mut" id="note" style="margin:8px 0 0"></p>
-  </div>
-  <div class="card"><h3>Need a person?</h3>
-    <p class="mut" style="margin:0 0 8px">Reach the Evolution Auto team for anything the assistant can’t solve.</p>
-    <a class="btn" href="tel:0744112132">Call 074 411 2132</a>
-  </div>
-</section>
+  <div class="evbuddy-safety">⚠️ For smoke, fire, accidents or brake failure, move away and call emergency services.</div>
+  <div id="log" aria-live="polite"></div>
+  <div class="chips" id="chips"></div>
+  <div class="send"><input id="q" placeholder="Ask EV Buddy…" autocomplete="off"><button class="btn" id="go">Send</button></div>
+  <p class="mut" id="note" style="margin:8px 0 0"></p>
+  <a class="buddy-call" href="tel:0744112132">Need a person? Call Evolution Auto</a>
+</aside>
+<main class="after-buddy-placeholder" hidden>
 
 <section id="emergency">
   <div class="card sos"><b>In immediate danger?</b> <span class="mut">Move to a safe place and contact the relevant emergency service first. EV Buddy and Evolution Auto are not emergency dispatch services.</span></div>
@@ -520,7 +599,7 @@ const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v)
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
 /* Tabs */
-const TABS=[["gar","My garage"],["help","EV Buddy"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
+const TABS=[["gar","My garage"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
 $("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
 function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id))}
 $("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
@@ -580,7 +659,69 @@ $("sa").onclick=()=>{const w=$("sw").value.trim(),d=$("sd").value;if(!w||!d)retu
 $("sl").onclick=e=>{if(e.target.dataset.a==="del"){e.preventDefault();const a=store.get("ea_s",[]);a.splice(+e.target.dataset.i,1);store.set("ea_s",a);renderSvc()}};
 setupVehiclePicker();load();renderSvc();
 
-/* Lightweight scroll reveal; content remains visible when motion is reduced. */
+
+/* Floating EV Buddy controls */
+const buddyPanel=$("evbuddyPanel"),buddyToggle=$("evbuddyToggle");
+function toggleBuddy(open){buddyPanel.classList.toggle("open",open);buddyPanel.setAttribute("aria-hidden",String(!open));buddyToggle.setAttribute("aria-expanded",String(open));if(open)setTimeout(()=>$("q").focus(),80)}
+buddyToggle.addEventListener("click",()=>toggleBuddy(!buddyPanel.classList.contains("open")));
+$("evbuddyClose").addEventListener("click",()=>toggleBuddy(false));
+document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleBuddy(false)});
+
+/* Local maintenance reminders and calendar exports */
+function calendarFile(title,start,description){
+ const stamp=start.replace(/[-:]/g,"").replace("T","T")+"00";
+ const end=new Date(start);end.setHours(end.getHours()+1);
+ const endStamp=end.getFullYear()+String(end.getMonth()+1).padStart(2,"0")+String(end.getDate()).padStart(2,"0")+"T"+String(end.getHours()).padStart(2,"0")+String(end.getMinutes()).padStart(2,"0")+"00";
+ const escIcs=v=>String(v||"").replace(/\\/g,"\\\\").replace(/,/g,"\\,").replace(/;/g,"\\;").replace(/\n/g,"\\n");
+ const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Evolution Auto//Owner Planner//EN","BEGIN:VEVENT","UID:"+Date.now()+"@evolution-auto","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,""),"DTSTART:"+stamp,"DTEND:"+endStamp,"SUMMARY:"+escIcs(title),"DESCRIPTION:"+escIcs(description),"END:VEVENT","END:VCALENDAR"].join("\r\n");
+ const url=URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"}));
+ const a=document.createElement("a");a.href=url;a.download="evolution-auto-"+Date.now()+".ics";a.click();setTimeout(()=>URL.revokeObjectURL(url),1500)
+}
+function renderCustomReminders(){
+ const list=store.get("ea_custom_reminders",[]);
+ $("customReminders").innerHTML=list.length?list.sort((a,b)=>a.date.localeCompare(b.date)).map((r,i)=>'<div class="planner-item"><div><strong>'+esc(r.name)+'</strong><small>'+esc(r.type)+' · '+esc(r.date)+(r.odo?' · '+esc(r.odo)+' km':'')+(r.notes?' · '+esc(r.notes):'')+'</small></div><div class="planner-actions"><button data-remcal="'+i+'">Calendar</button><button data-remdel="'+i+'">Remove</button></div></div>').join(""):'<p class="mut">No custom reminders yet.</p>';
+}
+$("addReminder").addEventListener("click",()=>{
+ const name=$("mrName").value.trim(),date=$("mrDate").value;
+ if(!name||!date){$("reminderStatus").textContent="Please enter a maintenance task and due date.";return}
+ const list=store.get("ea_custom_reminders",[]);list.push({name,date,type:$("mrType").value,odo:$("mrOdo").value,notes:$("mrNotes").value.trim(),notified:false});
+ store.set("ea_custom_reminders",list);$("mrName").value=$("mrDate").value=$("mrOdo").value=$("mrNotes").value="";
+ renderCustomReminders();checkMaintenanceAlerts();$("reminderStatus").textContent="Reminder saved on this device. Add it to your calendar for an external alert."
+});
+$("customReminders").addEventListener("click",e=>{
+ const list=store.get("ea_custom_reminders",[]),ci=e.target.dataset.remcal,di=e.target.dataset.remdel;
+ if(ci!==undefined){const r=list[+ci];calendarFile("Vehicle maintenance: "+r.name,r.date+"T09:00:00",r.type+" · "+(r.notes||"Evolution Auto maintenance reminder"))}
+ if(di!==undefined){list.splice(+di,1);store.set("ea_custom_reminders",list);renderCustomReminders()}
+});
+$("enableNotices").addEventListener("click",async()=>{
+ if(!("Notification" in window)){$("reminderStatus").textContent="This browser does not support desktop notifications.";return}
+ const permission=await Notification.requestPermission();
+ $("reminderStatus").textContent=permission==="granted"?"Notifications enabled. Keep this website open to receive due-date alerts.":"Notifications were not enabled. You can still use calendar reminders.";
+ checkMaintenanceAlerts()
+});
+function checkMaintenanceAlerts(){
+ if(!("Notification" in window)||Notification.permission!=="granted")return;
+ const today=new Date();today.setHours(0,0,0,0);
+ const list=store.get("ea_custom_reminders",[]);let changed=false;
+ list.forEach(r=>{const d=new Date(r.date+"T00:00:00");if(d<=today&&!r.notified){new Notification("Evolution Auto · Maintenance due",{body:r.name+" is due. Open your garage planner for details."});r.notified=true;changed=true}});
+ if(changed)store.set("ea_custom_reminders",list)
+}
+function renderAppointments(){
+ const list=store.get("ea_appointments",[]);
+ $("appointmentList").innerHTML=list.length?list.slice().reverse().map((a,i)=>'<div class="planner-item"><div><strong>'+esc(a.service)+'</strong><small>'+esc(a.date)+' · '+esc(a.time)+' · '+esc(a.phone||"No contact number")+'</small></div><span class="badge">Planned</span></div>').join(""):'<p class="mut">No appointments planned yet.</p>';
+}
+$("saveAppointment").addEventListener("click",()=>{
+ const date=$("apDate").value,time=$("apTime").value,service=$("apService").value,phone=$("apPhone").value.trim();
+ if(!date||!time){$("appointmentStatus").textContent="Please choose a preferred date and time.";return}
+ const start=new Date(date+"T"+time+":00");if(Number.isNaN(start.getTime())||start.getTime()<Date.now()){$("appointmentStatus").textContent="Choose a future date and time.";return}
+ const appointment={date,time,service,phone,notes:$("apNotes").value.trim()};
+ const list=store.get("ea_appointments",[]);list.push(appointment);store.set("ea_appointments",list);renderAppointments();
+ calendarFile("Evolution Auto · "+service,date+"T"+time+":00","Preferred service appointment (not confirmed). Contact Evolution Auto to confirm. Phone: "+phone+". "+appointment.notes);
+ $("appointmentStatus").textContent="Saved on this device and calendar file prepared. Please contact Evolution Auto to confirm the slot."
+});
+renderCustomReminders();renderAppointments();checkMaintenanceAlerts();
+setInterval(checkMaintenanceAlerts,60000);
+\n/* Lightweight scroll reveal; content remains visible when motion is reduced. */
 try{
  const revealTargets=[...document.querySelectorAll("section .card")];
  revealTargets.forEach(el=>el.classList.add("reveal"));
