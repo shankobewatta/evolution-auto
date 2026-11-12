@@ -432,7 +432,6 @@ a{color:var(--ac)}
   </div>
 </section>
 
-</main>
 <div class="evbuddy-launcher-wrap" aria-label="EV Buddy assistant">
   <button class="evbuddy-launcher" id="evbuddyToggle" type="button" aria-label="Open EV Buddy chat" aria-expanded="false">
     <span class="buddy-car" aria-hidden="true"><i class="buddy-eye left"></i><i class="buddy-eye right"></i><i class="buddy-smile"></i></span>
@@ -453,7 +452,6 @@ a{color:var(--ac)}
   <p class="mut" id="note" style="margin:8px 0 0"></p>
   <a class="buddy-call" href="tel:0744112132">Need a person? Call Evolution Auto</a>
 </aside>
-<main class="after-buddy-placeholder" hidden>
 
 <section id="emergency">
   <div class="card sos"><b>In immediate danger?</b> <span class="mut">Move to a safe place and contact the relevant emergency service first. EV Buddy and Evolution Auto are not emergency dispatch services.</span></div>
@@ -669,9 +667,10 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape")toggleBuddy(false)})
 
 /* Local maintenance reminders and calendar exports */
 function calendarFile(title,start,description){
- const stamp=start.replace(/[-:]/g,"").replace("T","T")+"00";
- const end=new Date(start);end.setHours(end.getHours()+1);
- const endStamp=end.getFullYear()+String(end.getMonth()+1).padStart(2,"0")+String(end.getDate()).padStart(2,"0")+"T"+String(end.getHours()).padStart(2,"0")+String(end.getMinutes()).padStart(2,"0")+"00";
+ const fmt=d=>d.getFullYear()+String(d.getMonth()+1).padStart(2,"0")+String(d.getDate()).padStart(2,"0")+"T"+String(d.getHours()).padStart(2,"0")+String(d.getMinutes()).padStart(2,"0")+"00";
+ const startDate=new Date(start),stamp=fmt(startDate);
+ const end=new Date(startDate);end.setHours(end.getHours()+1);
+ const endStamp=fmt(end);
  const escIcs=v=>String(v||"").replace(/\\/g,"\\\\").replace(/,/g,"\\,").replace(/;/g,"\\;").replace(/\n/g,"\\n");
  const ics=["BEGIN:VCALENDAR","VERSION:2.0","PRODID:-//Evolution Auto//Owner Planner//EN","BEGIN:VEVENT","UID:"+Date.now()+"@evolution-auto","DTSTAMP:"+new Date().toISOString().replace(/[-:]/g,"").replace(/\.\d{3}/,""),"DTSTART:"+stamp,"DTEND:"+endStamp,"SUMMARY:"+escIcs(title),"DESCRIPTION:"+escIcs(description),"END:VEVENT","END:VCALENDAR"].join("\r\n");
  const url=URL.createObjectURL(new Blob([ics],{type:"text/calendar;charset=utf-8"}));
