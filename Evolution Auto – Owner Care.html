@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Evolution Auto – Owner Care</title>
+<style>
+:root{--bg:#f5f7f6;--card:#fff;--tx:#14201c;--mut:#5b6b65;--ac:#0a8f6a;--acx:#fff;--bd:#dce4e0;--warn:#c2410c;--bad:#b91c1c;--ok:#0a8f6a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1512;--card:#17211d;--tx:#e8f0ec;--mut:#93a49c;--ac:#2fd1a0;--acx:#06251b;--bd:#27352f;--warn:#fb923c;--bad:#f87171;--ok:#2fd1a0;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0e1512;--card:#17211d;--tx:#e8f0ec;--mut:#93a49c;--ac:#2fd1a0;--acx:#06251b;--bd:#27352f;--warn:#fb923c;--bad:#f87171;--ok:#2fd1a0;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+header{padding:20px 16px 8px;max-width:760px;margin:auto}
+h1{font-size:22px;margin:0}header p{margin:2px 0 0;color:var(--mut);font-size:14px}
+nav{display:flex;gap:6px;max-width:760px;margin:8px auto;padding:0 16px;overflow-x:auto}
+nav button{flex:1;min-width:96px;border:1px solid var(--bd);background:var(--card);color:var(--tx);padding:10px 8px;border-radius:12px;font:inherit;font-size:14px;cursor:pointer}
+nav button.on{background:var(--ac);color:var(--acx);border-color:var(--ac);font-weight:600}
+main{max-width:760px;margin:auto;padding:8px 16px 40px}
+section{display:none}section.on{display:block}
+.card{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+.card h3{margin:0 0 6px;font-size:16px}
+.mut{color:var(--mut);font-size:14px}
+input,select,textarea{width:100%;padding:10px;border:1px solid var(--bd);border-radius:10px;background:var(--bg);color:var(--tx);font:inherit}
+label{display:block;font-size:13px;color:var(--mut);margin:8px 0 2px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btn{background:var(--ac);color:var(--acx);border:0;border-radius:10px;padding:10px 14px;font:inherit;font-weight:600;cursor:pointer;text-decoration:none;display:inline-block}
+.btn.s{background:transparent;color:var(--ac);border:1px solid var(--ac)}
+#log{height:min(52vh,420px);overflow-y:auto;display:flex;flex-direction:column;gap:8px;padding:4px}
+.m{max-width:85%;padding:9px 12px;border-radius:14px;white-space:pre-wrap}
+.m.u{align-self:flex-end;background:var(--ac);color:var(--acx)}
+.m.b{align-self:flex-start;background:var(--bg);border:1px solid var(--bd)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}
+.chip{border:1px solid var(--bd);background:var(--card);color:var(--tx);border-radius:99px;padding:6px 12px;font-size:13px;cursor:pointer}
+.send{display:flex;gap:8px;margin-top:8px}
+details{border-bottom:1px solid var(--bd);padding:10px 0}details:last-child{border:0}
+summary{cursor:pointer;font-weight:600}
+.pill{display:inline-block;padding:2px 10px;border-radius:99px;font-size:12px;font-weight:600;border:1px solid currentColor}
+.ok{color:var(--ok)}.soon{color:var(--warn)}.over{color:var(--bad)}
+.rem{display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--bd)}
+.rem:last-child{border:0}
+.sos{border-color:var(--bad)}
+</style>
+</head>
+<body>
+<header>
+  <h1>⚡ Evolution Auto – Owner Care</h1>
+  <p>Help, common fixes, charging and your service reminders in one place.</p>
+</header>
+<nav id="tabs"></nav>
+<main>
+<section id="help">
+  <div class="card sos"><b>Safety first:</b> <span class="mut">if you see smoke, smell burning, or have been in an accident, stop, switch off, move everyone away from the vehicle and call emergency services (118/119) before anything else.</span></div>
+  <div class="card">
+    <div id="log" aria-live="polite"></div>
+    <div class="chips" id="chips"></div>
+    <div class="send"><input id="q" placeholder="Describe the problem with your vehicle…" autocomplete="off"><button class="btn" id="go">Send</button></div>
+    <p class="mut" id="note" style="margin:8px 0 0"></p>
+  </div>
+  <div class="card"><h3>Need a person?</h3>
+    <p class="mut" style="margin:0 0 8px">Reach the Evolution Auto team for anything the assistant can’t solve.</p>
+    <a class="btn" href="tel:0744112132">Call 074 411 2132</a>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="card"><input id="fs" placeholder="Search common problems…"><div id="fl" style="margin-top:6px"></div></div>
+</section>
+
+<section id="chg">
+  <div class="card"><h3>Find a charger near you</h3>
+    <p class="mut">Opens a live map search around your current location.</p>
+    <button class="btn" id="near">Use my location</button>
+    <a class="btn s" target="_blank" rel="noopener" href="https://www.google.com/maps/search/EV+charging+station+Sri+Lanka">Search all Sri Lanka</a>
+  </div>
+  <div class="card"><h3>Evolution Auto locations</h3>
+    <div class="rem"><span><b>Showroom</b><br><span class="mut">No 7, R A De Mel Mawatha, Colombo 05</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Evolution+Auto+R+A+De+Mel+Mawatha+Colombo+05">Map</a></div>
+    <div class="rem"><span><b>Multi-brand after-sales complex</b><br><span class="mut">Peliyagoda</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Evolution+Auto+Peliyagoda">Map</a></div>
+    <div class="rem"><span><b>Showroom (with New Jayasekara Auto Motors)</b><br><span class="mut">Kurunegala</span></span><a target="_blank" rel="noopener" href="https://www.google.com/maps/search/Evolution+Auto+Kurunegala">Map</a></div>
+  </div>
+  <div class="card"><h3>My saved charging spots</h3>
+    <div class="row"><div><label>Name</label><input id="cn" placeholder="e.g. Home, Office, Mall"></div><div><label>Notes</label><input id="cd" placeholder="Connector, speed, hours"></div></div>
+    <p><button class="btn" id="cadd">Save spot</button></p><div id="cl"></div>
+  </div>
+</section>
+
+<section id="gar">
+  <div class="card"><h3>Upcoming &amp; due</h3><div id="rem" class="mut">Add your details below to see reminders.</div></div>
+  <div class="card"><h3>My vehicle</h3>
+    <div class="row"><div><label>Model</label><input id="vm" placeholder="e.g. XPENG G6"></div><div><label>Registration no.</label><input id="vr"></div></div>
+    <div class="row"><div><label>Purchase date</label><input type="date" id="vp"></div><div><label>Warranty ends</label><input type="date" id="vw"></div></div>
+    <div class="row"><div><label>Last service date</label><input type="date" id="vl"></div><div><label>Service every (months)</label><input type="number" id="vi" min="1" value="6"></div></div>
+    <div class="row"><div><label>Insurance expiry</label><input type="date" id="vn"></div><div><label>Revenue licence expiry</label><input type="date" id="vv"></div></div>
+    <div class="row"><div><label>Odometer (km)</label><input type="number" id="vo"></div><div><label>Home charger installed</label><select id="vc"><option>No</option><option>Yes</option></select></div></div>
+    <label>Notes</label><textarea id="vt" rows="2"></textarea>
+    <p><button class="btn" id="vs">Save details</button> <span class="mut" id="vmsg"></span></p>
+  </div>
+  <div class="card"><h3>Service history</h3>
+    <div class="row"><div><label>Date</label><input type="date" id="sd"></div><div><label>Odometer (km)</label><input type="number" id="so"></div></div>
+    <label>Work done</label><input id="sw" placeholder="e.g. Periodic service, tyre rotation">
+    <p><button class="btn" id="sa">Add entry</button></p><div id="sl"></div>
+    <p class="mut">Records are saved privately in this browser on this device only.</p>
+  </div>
+</section>
+</main>
+
+<script>
+const $=id=>document.getElementById(id);
+const PHONE="074 411 2132";
+const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+
+/* Tabs */
+const TABS=[["help","Ask AI"],["faq","Common issues"],["chg","Charging"],["gar","My garage"]];
+$("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
+function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id))}
+$("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("help");
+
+/* Common issues */
+const FAQ=[
+["range battery drain less distance","Range is lower than expected","Range drops with high speed, heavy A/C use, cold or very hot weather, low tyre pressure and extra load. Check tyre pressure, use eco mode and pre-condition the cabin while plugged in. If range falls suddenly or the battery warning shows, book a battery health check."],
+["charging not starting charger plug fault","Charging won’t start","Check the charger has power, then unplug and re-plug firmly. Make sure the vehicle is unlocked, the charge port is clear of dirt or water, and try a different socket or charger. If it still fails, note any error message and contact service."],
+["slow charging speed","Charging is slow","Home sockets charge much slower than a wall charger or DC fast charger. Very low or very high battery temperature and charging above 80% also slow things down. Use a dedicated wall charger for daily use."],
+["warning light dashboard message","A warning light is on","Don’t ignore red warnings: stop safely, switch off and call service. Amber lights are usually advisory (e.g. tyre pressure or service due), so drive gently and book a check soon. Note the symbol and message."],
+["wont turn on dead 12v battery power start","Vehicle won’t power on","The small 12V battery can go flat even when the main battery is full, especially if the car sits unused. Try locking and unlocking, pressing the brake and starting again. If it stays dead, request roadside assistance rather than jump-starting without guidance."],
+["tyre pressure noise vibration","Tyre pressure, noise or vibration","EVs are heavy and wear tyres faster. Check pressure monthly against the door-jamb label. Vibration or uneven wear usually means alignment or balancing is needed."],
+["app connect bluetooth screen infotainment software","Screen, app or connectivity glitch","Restart the infotainment system (see your owner’s manual), check phone Bluetooth and app permissions, and keep software updated. If it repeats, tell service the exact steps that cause it."],
+["brake regen feel pedal one pedal","Braking feels different","EVs use regenerative braking, so lifting off the accelerator slows the car. Adjust regen strength in the settings. A soft or grinding brake pedal is not normal: stop driving and get it checked."],
+["ac air conditioning cooling heat","Air-conditioning not cooling well","Pre-cool while plugged in, check cabin filter condition and make sure vents are clear. Weak cooling that persists needs a service check of the A/C system."]
+];
+function renderFaq(){const q=$("fs").value.toLowerCase();$("fl").innerHTML=FAQ.filter(f=>!q||(f[0]+f[1]+f[2]).toLowerCase().includes(q)).map(f=>`<details><summary>${f[1]}</summary><p class="mut">${f[2]}</p></details>`).join("")||'<p class="mut">No match. Try the AI assistant.</p>'}
+$("fs").oninput=renderFaq;renderFaq();
+
+/* AI chat (uses Claude through the page runtime; falls back to the FAQ) */
+let S=null;(async()=>{try{if(window.claude)S=await claude.use("sample")}catch(e){}$("note").textContent=S?"AI assistant is on. Replies are guidance only; for safety issues call the team.":"AI assistant isn’t available here, so answers come from the common-issues list."})();
+const hist=[];
+const SYS="You are the Evolution Auto owner-care assistant for Sri Lanka. Evolution Auto distributes electric vehicles (Avatr, IM Motors, XPENG, Riddara, KYC, King Long) plus Ather, Revolt and Mahindra two- and three-wheelers. Help owners with EV problems: give a short, clear diagnosis and numbered steps they can safely try. Never advise opening high-voltage components or anything unsafe. For smoke, burning smell, accidents, brake or steering failure, tell them to stop safely, leave the vehicle and call emergency services, then the team on "+PHONE+". If unsure or the fix needs a technician, recommend booking service rather than guessing. Do not invent prices or warranty terms. Keep answers under 150 words.";
+function add(c,t){const d=document.createElement("div");d.className="m "+c;d.textContent=t;$("log").appendChild(d);$("log").scrollTop=1e9;return d}
+add("b","Hi! Tell me what’s wrong with your vehicle and I’ll suggest what to try. For anything unsafe, call "+PHONE+".");
+$("chips").innerHTML=["Car won’t charge","Range dropped","Warning light on","Service due?"].map(c=>`<button class="chip">${c}</button>`).join("");
+$("chips").onclick=e=>{if(e.target.className==="chip"){$("q").value=e.target.textContent;ask()}};
+function fallback(t){t=t.toLowerCase();let best=null,sc=0;FAQ.forEach(f=>{const s=f[0].split(" ").filter(w=>t.includes(w)).length;if(s>sc){sc=s;best=f}});if(/service/.test(t)&&!best)return "Open the My garage tab to see when your next service is due, or call "+PHONE+" to book.";return best?best[1]+": "+best[2]:"I’m not sure about that one. Please call the team on "+PHONE+" so a technician can help."}
+async function ask(){const t=$("q").value.trim();if(!t)return;$("q").value="";add("u",t);hist.push({role:"user",content:t});const g=store.get("ea_v",{});const out=add("b","Thinking…");
+ if(!S){const r=fallback(t);out.textContent=r;hist.push({role:"assistant",content:r});return}
+ const ctx=g.model?"\nOwner’s vehicle: "+g.model+(g.odo?", "+g.odo+" km":"")+".":"";
+ const msgs=hist.map((m,i)=>i===0?{role:m.role,content:SYS+ctx+"\n\nOwner: "+m.content}:m);
+ try{const r=await S(msgs,{cache:false,onText:x=>{out.textContent=x.text;$("log").scrollTop=1e9}});out.textContent=r.text;hist.push({role:"assistant",content:r.text})}
+ catch(e){const r=fallback(t);out.textContent=r;hist.push({role:"assistant",content:r})}}
+$("go").onclick=ask;$("q").onkeydown=e=>{if(e.key==="Enter")ask()};
+
+/* Charging */
+$("near").onclick=()=>{const open=(la,ln)=>window.open("https://www.google.com/maps/search/EV+charging+station/@"+la+","+ln+",14z","_blank","noopener");if(!navigator.geolocation)return window.open("https://www.google.com/maps/search/EV+charging+station+near+me","_blank","noopener");navigator.geolocation.getCurrentPosition(p=>open(p.coords.latitude,p.coords.longitude),()=>window.open("https://www.google.com/maps/search/EV+charging+station+near+me","_blank","noopener"))};
+function renderSpots(){const a=store.get("ea_c",[]);$("cl").innerHTML=a.map((s,i)=>`<div class="rem"><span><b>${esc(s.n)}</b><br><span class="mut">${esc(s.d||"")}</span></span><a href="#" data-i="${i}" data-a="del">Remove</a></div>`).join("")||'<p class="mut">Nothing saved yet.</p>'}
+$("cadd").onclick=()=>{const n=$("cn").value.trim();if(!n)return;const a=store.get("ea_c",[]);a.push({n,d:$("cd").value.trim()});store.set("ea_c",a);$("cn").value=$("cd").value="";renderSpots()};
+$("cl").onclick=e=>{if(e.target.dataset.a==="del"){e.preventDefault();const a=store.get("ea_c",[]);a.splice(+e.target.dataset.i,1);store.set("ea_c",a);renderSpots()}};renderSpots();
+
+/* Garage */
+const F={model:"vm",reg:"vr",bought:"vp",warr:"vw",last:"vl",every:"vi",ins:"vn",lic:"vv",odo:"vo",home:"vc",notes:"vt"};
+function load(){const v=store.get("ea_v",{});for(const k in F){if(v[k]!=null)$(F[k]).value=v[k]}reminders()}
+$("vs").onclick=()=>{const v={};for(const k in F)v[k]=$(F[k]).value;$("vmsg").textContent=store.set("ea_v",v)?"Saved ✓":"Couldn’t save in this browser";reminders()};
+function days(d){return Math.ceil((new Date(d+"T00:00:00")-new Date(new Date().toDateString()))/864e5)}
+function badge(n){return n<0?`<span class="pill over">${-n} d overdue</span>`:n<=30?`<span class="pill soon">in ${n} d</span>`:`<span class="pill ok">in ${n} d</span>`}
+function reminders(){const v=store.get("ea_v",{}),r=[];
+ if(v.last&&v.every){const d=new Date(v.last+"T00:00:00");d.setMonth(d.getMonth()+(+v.every||6));r.push(["Next service",d.toISOString().slice(0,10)])}
+ if(v.ins)r.push(["Insurance renewal",v.ins]);if(v.lic)r.push(["Revenue licence",v.lic]);if(v.warr)r.push(["Warranty ends",v.warr]);
+ r.sort((a,b)=>a[1]<b[1]?-1:1);
+ $("rem").innerHTML=r.length?r.map(x=>`<div class="rem"><span>${x[0]}<br><span class="mut">${x[1]}</span></span>${badge(days(x[1]))}</div>`).join(""):"Add your details below to see reminders."}
+function renderSvc(){const a=store.get("ea_s",[]);$("sl").innerHTML=a.map((s,i)=>`<div class="rem"><span><b>${esc(s.w)}</b><br><span class="mut">${esc(s.d)}${s.o?" · "+esc(s.o)+" km":""}</span></span><a href="#" data-i="${i}" data-a="del">Remove</a></div>`).join("")||'<p class="mut">No entries yet.</p>'}
+$("sa").onclick=()=>{const w=$("sw").value.trim(),d=$("sd").value;if(!w||!d)return;const a=store.get("ea_s",[]);a.push({w,d,o:$("so").value});a.sort((x,y)=>x.d<y.d?1:-1);store.set("ea_s",a);$("sw").value=$("so").value="";
+ const v=store.get("ea_v",{});if(!v.last||d>v.last){v.last=d;if($("so").value||a[0].o)v.odo=a[0].o||v.odo;store.set("ea_v",v);load()}renderSvc()};
+$("sl").onclick=e=>{if(e.target.dataset.a==="del"){e.preventDefault();const a=store.get("ea_s",[]);a.splice(+e.target.dataset.i,1);store.set("ea_s",a);renderSvc()}};
+load();renderSvc();
+</script>
+</body>
+</html>
