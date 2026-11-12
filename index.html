@@ -79,6 +79,48 @@ a{color:var(--ac)}
 @media(max-width:430px){.brandname{font-size:11px}.theme-toggle{padding:8px 10px;font-size:11px}.row{grid-template-columns:1fr}.send .btn{padding:10px 13px}h1{font-size:38px}}
 @media(prefers-reduced-motion:reduce){*,*:before,*:after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
 
+
+/* Personalised vehicle garage */
+.vehicle-picker{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.25fr);gap:18px;align-items:stretch}
+.vehicle-stage{min-height:260px;position:relative;overflow:hidden;border:1px solid var(--bd);border-radius:16px;background:radial-gradient(ellipse at 50% 72%,color-mix(in srgb,var(--ac) 19%,transparent),transparent 55%),linear-gradient(145deg,var(--bg2),var(--card2));display:grid;place-items:center;isolation:isolate}
+.vehicle-stage:before{content:"";position:absolute;inset:0;background:linear-gradient(transparent 95%,var(--grid) 96%),linear-gradient(90deg,transparent 95%,var(--grid) 96%);background-size:26px 26px;opacity:.7}
+.vehicle-stage:after{content:"";position:absolute;width:78%;height:22px;bottom:34px;border-radius:50%;background:var(--ac);filter:blur(24px);opacity:.17}
+.vehicle-stage .stage-label{position:absolute;left:15px;top:13px;font-size:9px;letter-spacing:.18em;color:var(--mut);font-weight:850;z-index:2}
+.vehicle-stage .stage-code{position:absolute;right:15px;top:13px;font-size:9px;letter-spacing:.12em;color:var(--ac);z-index:2}
+.vehicle-visual{--bodyw:245px;--bodyh:66px;position:relative;width:var(--bodyw);height:145px;transform:perspective(650px) rotateX(8deg) rotateY(-16deg) rotateZ(-5deg);transform-style:preserve-3d;filter:drop-shadow(0 18px 15px rgba(0,0,0,.28));z-index:1;animation:vehicleFloat 5s ease-in-out infinite}
+@keyframes vehicleFloat{0%,100%{translate:0 0}50%{translate:0 -7px}}
+.vehicle-body{position:absolute;left:0;right:0;bottom:37px;height:var(--bodyh);border-radius:38px 54px 15px 15px;background:linear-gradient(155deg,#f8fbf5 0%,#aab6ae 24%,#39453e 62%,#111a14 100%);border:1px solid rgba(255,255,255,.55);box-shadow:inset 0 5px 12px rgba(255,255,255,.45),inset 0 -9px 13px rgba(0,0,0,.45);transform:translateZ(10px)}
+.vehicle-cabin{position:absolute;left:23%;bottom:calc(37px + var(--bodyh) - 1px);width:52%;height:56px;border-radius:62px 70px 5px 5px;background:linear-gradient(145deg,#dcebe4 0%,#536a61 42%,#15241e 100%);border:1px solid rgba(255,255,255,.42);clip-path:polygon(15% 0,82% 0,100% 100%,0 100%);transform:translateZ(15px)}
+.vehicle-cabin:after{content:"";position:absolute;left:50%;top:3px;bottom:0;border-left:1px solid rgba(255,255,255,.25)}
+.vehicle-wheel{position:absolute;bottom:16px;width:48px;height:48px;border-radius:50%;background:radial-gradient(circle,#9ba69e 0 15%,#1b241f 17% 35%,#080c0a 38% 68%,#6d7b71 70% 74%,#101713 76%);border:3px solid #141c17;box-shadow:0 0 0 2px rgba(255,255,255,.2);z-index:3}
+.vehicle-wheel.front{right:28px}.vehicle-wheel.rear{left:29px}
+.vehicle-light{position:absolute;right:4px;bottom:62px;width:24px;height:7px;background:#d9fff1;box-shadow:0 0 16px #c9ffe6;border-radius:8px;z-index:4}
+.vehicle-visual.pickup .vehicle-body{border-radius:22px 35px 12px 12px}
+.vehicle-visual.pickup .vehicle-cabin{left:8%;width:38%;height:58px}
+.vehicle-visual.van .vehicle-body{height:90px;border-radius:22px 28px 12px 12px}
+.vehicle-visual.van .vehicle-cabin{display:none}
+.vehicle-visual.van .vehicle-wheel{bottom:13px}
+.vehicle-visual.bike,.vehicle-visual.scooter,.vehicle-visual.tuk{--bodyw:210px;--bodyh:40px}
+.vehicle-visual.bike .vehicle-body,.vehicle-visual.scooter .vehicle-body,.vehicle-visual.tuk .vehicle-body{left:35px;right:35px;height:42px;bottom:42px;border-radius:24px 30px 12px 12px}
+.vehicle-visual.bike .vehicle-cabin,.vehicle-visual.scooter .vehicle-cabin{left:68px;width:75px;height:45px;bottom:78px;border-radius:35px 35px 5px 5px}
+.vehicle-visual.bike .vehicle-wheel,.vehicle-visual.scooter .vehicle-wheel,.vehicle-visual.tuk .vehicle-wheel{width:43px;height:43px;bottom:16px}
+.vehicle-visual.bike .vehicle-wheel.rear,.vehicle-visual.scooter .vehicle-wheel.rear,.vehicle-visual.tuk .vehicle-wheel.rear{left:12px}
+.vehicle-visual.bike .vehicle-wheel.front,.vehicle-visual.scooter .vehicle-wheel.front,.vehicle-visual.tuk .vehicle-wheel.front{right:12px}
+.vehicle-visual.tuk .vehicle-cabin{left:70px;width:95px;height:75px;bottom:75px;border-radius:18px 20px 4px 4px;clip-path:none}
+.vehicle-visual.tuk .vehicle-wheel.front{right:12px}
+.vehicle-visual.tuk .vehicle-wheel.rear{left:12px}
+.vehicle-meta{display:flex;flex-direction:column;justify-content:center;gap:12px}
+.vehicle-meta h3{font-size:clamp(21px,3vw,30px);margin:0;letter-spacing:-.04em}
+.vehicle-meta .mut{max-width:480px}
+.vehicle-specs{display:flex;flex-wrap:wrap;gap:7px}
+.vehicle-specs span{border:1px solid var(--bd);border-radius:99px;padding:6px 10px;color:var(--ac);font-size:10px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.vehicle-actions{display:flex;gap:8px;flex-wrap:wrap}
+.vehicle-personal{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:14px}
+.vehicle-personal .mini{background:var(--card2);border:1px solid var(--bd);border-radius:12px;padding:13px}
+.vehicle-personal .mini b{display:block;font-size:12px;margin-bottom:4px}
+.vehicle-personal .mini span{font-size:11px;color:var(--mut)}
+@media(max-width:700px){.vehicle-picker{grid-template-columns:1fr}.vehicle-stage{min-height:215px}.vehicle-personal{grid-template-columns:1fr}.vehicle-visual{scale:.88}}
+
 </style>
 </head>
 <body>
@@ -144,9 +186,39 @@ a{color:var(--ac)}
 </section>
 
 <section id="gar">
+  <div class="card">
+    <div class="eyebrow">YOUR EVOLUTION AUTO</div>
+    <h3 style="font-size:21px;margin:8px 0 4px">Your vehicle. Your experience.</h3>
+    <p class="mut" style="margin:0 0 12px">Choose the vehicle you own to personalise your dashboard and support experience.</p>
+    <div class="vehicle-picker">
+      <div class="vehicle-meta">
+        <label for="vm">Select your vehicle</label>
+        <select id="vm" aria-label="Choose your Evolution Auto vehicle">
+          <option value="">Choose your vehicle…</option>
+        </select>
+        <input id="customModel" placeholder="Enter your vehicle model" style="display:none">
+        <div class="mut" id="vehicleHint">Your selected model will appear here.</div>
+        <div class="vehicle-actions"><button class="btn" id="applyVehicle" type="button">Personalise my app</button><button class="btn s" id="resetVehicle" type="button">Change vehicle</button></div>
+      </div>
+      <div class="vehicle-stage" aria-label="Stylised 3D vehicle preview">
+        <span class="stage-label">3D VEHICLE PREVIEW</span><span class="stage-code" id="vehicleCode">EA / SELECT</span>
+        <div class="vehicle-visual" id="vehicleVisual"><div class="vehicle-body"></div><div class="vehicle-cabin"></div><div class="vehicle-wheel rear"></div><div class="vehicle-wheel front"></div><div class="vehicle-light"></div></div>
+      </div>
+    </div>
+    <div class="vehicle-meta" style="margin-top:14px">
+      <h3 id="vehicleTitle">Select your Evolution Auto vehicle</h3>
+      <p class="mut" id="vehicleDescription">Your ownership space will adapt to the vehicle you choose.</p>
+      <div class="vehicle-specs" id="vehicleSpecs"><span>PERSONALISED CARE</span><span>EV SUPPORT</span></div>
+    </div>
+    <div class="vehicle-personal" id="vehiclePersonal">
+      <div class="mini"><b>Charging & energy</b><span>Vehicle-specific charging guidance</span></div>
+      <div class="mini"><b>Maintenance</b><span>Service reminders for your vehicle</span></div>
+      <div class="mini"><b>Owner support</b><span>Relevant help and care information</span></div>
+    </div>
+  </div>
   <div class="card"><h3>Upcoming &amp; due</h3><div id="rem" class="mut">Add your details below to see reminders.</div></div>
   <div class="card"><h3>My vehicle</h3>
-    <div class="row"><div><label>Model</label><input id="vm" placeholder="e.g. XPENG G6"></div><div><label>Registration no.</label><input id="vr"></div></div>
+    <div><label>Registration no.</label><input id="vr"></div>
     <div class="row"><div><label>Purchase date</label><input type="date" id="vp"></div><div><label>Warranty ends</label><input type="date" id="vw"></div></div>
     <div class="row"><div><label>Last service date</label><input type="date" id="vl"></div><div><label>Service every (months)</label><input type="number" id="vi" min="1" value="6"></div></div>
     <div class="row"><div><label>Insurance expiry</label><input type="date" id="vn"></div><div><label>Revenue licence expiry</label><input type="date" id="vv"></div></div>
@@ -178,6 +250,51 @@ let savedTheme=null;try{savedTheme=localStorage.getItem(themeStoreKey)}catch(e){
 setTheme(savedTheme==="light"?"light":"dark");
 $("themeToggle").addEventListener("click",()=>setTheme(document.documentElement.dataset.theme==="dark"?"light":"dark"));
 const PHONE="074 411 2132";
+
+const MODELS=[
+ {name:"AVATR 11",brand:"AVATR",type:"suv",category:"Luxury electric SUV",code:"AVATR / 11",desc:"A premium electric SUV experience with connected ownership and high-end comfort.",features:["Luxury SUV","Electric","Smart cockpit"],care:"Premium SUV care",charge:"Home & rapid charging guidance",support:"AVATR ownership support"},
+ {name:"IM6",brand:"IM Motors",type:"suv",category:"Electric SUV",code:"IM / 06",desc:"Your IM6 ownership space, with EV care and vehicle-focused support.",features:["Electric SUV","Smart tech","Connected"],care:"SUV service schedule",charge:"Charging and battery guidance",support:"IM Motors support"},
+ {name:"IM5",brand:"IM Motors",type:"sedan",category:"Electric sedan",code:"IM / 05",desc:"A personalised electric sedan dashboard for everyday driving and ownership.",features:["Electric sedan","Smart tech","Connected"],care:"Sedan service schedule",charge:"Charging and battery guidance",support:"IM Motors support"},
+ {name:"XPENG G6",brand:"XPENG",type:"suv",category:"Smart electric SUV",code:"XPENG / G6",desc:"A smart EV ownership experience built around connected technology and electric mobility.",features:["Smart SUV","Electric","Driver tech"],care:"XPENG service schedule",charge:"Charging and battery guidance",support:"XPENG owner support"},
+ {name:"RIDDARA ACTIVE",brand:"Riddara",type:"pickup",category:"Electric pickup",code:"RIDDARA / ACTIVE",desc:"A pickup-focused dashboard for utility, everyday driving and EV ownership.",features:["Electric pickup","Utility","All-rounder"],care:"Pickup service schedule",charge:"Charging and battery guidance",support:"Riddara owner support"},
+ {name:"RIDDARA RD6",brand:"Riddara",type:"pickup",category:"Electric pickup",code:"RIDDARA / RD6",desc:"Your RD6 garage with pickup-oriented ownership care and EV support.",features:["Electric pickup","Utility","Connected"],care:"Pickup service schedule",charge:"Charging and battery guidance",support:"Riddara owner support"},
+ {name:"KING LONG KINGWIN+",brand:"King Long",type:"van",category:"Electric commercial van",code:"KING LONG / KW+",desc:"A practical fleet and commercial vehicle ownership space.",features:["Electric van","Commercial","Fleet-ready"],care:"Commercial service tracking",charge:"Fleet charging guidance",support:"Commercial vehicle support"},
+ {name:"KYC V7",brand:"KYC",type:"van",category:"Electric passenger van",code:"KYC / V7",desc:"A passenger-van dashboard with practical service and operational reminders.",features:["Passenger van","Electric","Commercial"],care:"Van service schedule",charge:"Charging and battery guidance",support:"KYC owner support"},
+ {name:"KYC V5",brand:"KYC",type:"van",category:"Electric commercial vehicle",code:"KYC / V5",desc:"A vehicle-care space for your KYC V5.",features:["Electric van","Commercial","Practical"],care:"Commercial service tracking",charge:"Charging guidance",support:"KYC owner support"},
+ {name:"ATHER 450X",brand:"Ather",type:"scooter",category:"Electric scooter",code:"ATHER / 450X",desc:"A scooter-first ownership experience with charging, range and maintenance support.",features:["Electric scooter","Connected","Urban mobility"],care:"Scooter maintenance",charge:"Home charging and range tips",support:"Ather owner support"},
+ {name:"REVOLT RV400 BRZ",brand:"Revolt",type:"bike",category:"Electric motorcycle",code:"REVOLT / RV400",desc:"Your electric motorcycle dashboard, tuned for riding and everyday care.",features:["Electric motorcycle","Urban riding","Connected"],care:"Motorcycle maintenance",charge:"Battery and charging guidance",support:"Revolt owner support"},
+ {name:"MAHINDRA TREO",brand:"Mahindra",type:"tuk",category:"Electric three-wheeler",code:"MAHINDRA / TREO",desc:"A three-wheeler ownership dashboard for daily work and reliable operation.",features:["Electric three-wheeler","Work-ready","Commercial"],care:"Three-wheeler service schedule",charge:"Daily charging guidance",support:"Mahindra owner support"},
+ {name:"MAHINDRA TREO PLUS",brand:"Mahindra",type:"tuk",category:"Electric three-wheeler",code:"MAHINDRA / TREO+",desc:"A practical ownership space for your Treo Plus.",features:["Electric three-wheeler","Work-ready","Commercial"],care:"Three-wheeler service schedule",charge:"Daily charging guidance",support:"Mahindra owner support"},
+ {name:"MAHINDRA TREO ZOR DV",brand:"Mahindra",type:"tuk",category:"Electric cargo three-wheeler",code:"MAHINDRA / ZOR DV",desc:"A cargo-focused dashboard for daily operations, service and charging.",features:["Electric cargo","Three-wheeler","Utility"],care:"Cargo vehicle maintenance",charge:"Daily charging guidance",support:"Mahindra owner support"},
+ {name:"OTHER / NOT LISTED",brand:"Other",type:"suv",category:"Other vehicle",code:"EA / CUSTOM",desc:"Add your own vehicle details and use the core owner-care tools.",features:["Custom vehicle","Owner care","EV support"],care:"Custom service reminders",charge:"General EV charging guidance",support:"Evolution Auto team"}
+];
+function setupVehiclePicker(){
+ $("vm").innerHTML='<option value="">Choose your vehicle…</option>'+MODELS.map(m=>'<option value="'+m.name+'">'+m.name+'</option>').join("");
+ const saved=store.get("ea_v",{});
+ if(saved.model && [...$("vm").options].some(o=>o.value===saved.model)) $("vm").value=saved.model;
+ else if(saved.model){$("vm").value="OTHER / NOT LISTED";$("customModel").style.display="block";$("customModel").value=saved.model}
+ renderVehicle();
+}
+function renderVehicle(){
+ const name=$("vm").value, m=MODELS.find(x=>x.name===name);
+ const custom=$("customModel").value.trim();
+ $("customModel").style.display=name==="OTHER / NOT LISTED"?"block":"none";
+ if(!m){$("vehicleTitle").textContent="Select your Evolution Auto vehicle";$("vehicleDescription").textContent="Your ownership space will adapt to the vehicle you choose.";$("vehicleHint").textContent="Choose a model from the list above.";$("vehicleCode").textContent="EA / SELECT";$("vehicleSpecs").innerHTML="<span>PERSONALISED CARE</span><span>EV SUPPORT</span>";$("vehiclePersonal").innerHTML='<div class="mini"><b>Charging & energy</b><span>Vehicle-specific charging guidance</span></div><div class="mini"><b>Maintenance</b><span>Service reminders for your vehicle</span></div><div class="mini"><b>Owner support</b><span>Relevant help and care information</span></div>';$("vehicleVisual").className="vehicle-visual";return}
+ $("vehicleTitle").textContent=custom||m.name;$("vehicleDescription").textContent=m.desc;$("vehicleHint").textContent=m.brand+" · "+m.category;$("vehicleCode").textContent=m.code;
+ $("vehicleSpecs").innerHTML=m.features.map(x=>"<span>"+x+"</span>").join("");
+ $("vehiclePersonal").innerHTML='<div class="mini"><b>Charging & energy</b><span>'+m.charge+'</span></div><div class="mini"><b>Maintenance</b><span>'+m.care+'</span></div><div class="mini"><b>Owner support</b><span>'+m.support+'</span></div>';
+ $("vehicleVisual").className="vehicle-visual "+m.type;
+}
+$("vm").addEventListener("change",renderVehicle);
+$("customModel").addEventListener("input",renderVehicle);
+$("applyVehicle").addEventListener("click",()=>{
+ const m=MODELS.find(x=>x.name===$("vm").value);if(!m){$("vehicleHint").textContent="Choose a vehicle first.";return}
+ const v=store.get("ea_v",{});v.model=m.name==="OTHER / NOT LISTED"?($("customModel").value.trim()||"Other vehicle"):m.name;store.set("ea_v",v);
+ $("vehicleTitle").textContent=v.model;$("vehicleHint").textContent="Your dashboard is now set to "+v.model+".";
+ $("vm").value=m.name;load();
+});
+$("resetVehicle").addEventListener("click",()=>{$("vm").value="";$("customModel").value="";renderVehicle()});
+
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
@@ -240,7 +357,7 @@ function renderSvc(){const a=store.get("ea_s",[]);$("sl").innerHTML=a.map((s,i)=
 $("sa").onclick=()=>{const w=$("sw").value.trim(),d=$("sd").value;if(!w||!d)return;const a=store.get("ea_s",[]);a.push({w,d,o:$("so").value});a.sort((x,y)=>x.d<y.d?1:-1);store.set("ea_s",a);$("sw").value=$("so").value="";
  const v=store.get("ea_v",{});if(!v.last||d>v.last){v.last=d;if($("so").value||a[0].o)v.odo=a[0].o||v.odo;store.set("ea_v",v);load()}renderSvc()};
 $("sl").onclick=e=>{if(e.target.dataset.a==="del"){e.preventDefault();const a=store.get("ea_s",[]);a.splice(+e.target.dataset.i,1);store.set("ea_s",a);renderSvc()}};
-load();renderSvc();
+setupVehiclePicker();load();renderSvc();
 </script>
 </body>
 </html>
