@@ -204,6 +204,97 @@ nav button.on{background:linear-gradient(120deg,#39b8ff,#5b8cff);color:#041326;b
 @media(max-width:430px){.emergency-grid{grid-template-columns:1fr 1fr}.emergency-link{padding:13px}.emergency-link strong{font-size:19px}.send{align-items:stretch}.send input{min-width:0}}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.pulse-dot{animation:none}}
 
+
+/* LUXURY MOTION / violet + aqua identity */
+:root{
+ --bg:#090817;--bg2:#15102c;--card:rgba(25,20,52,.76);--card2:rgba(33,27,67,.82);
+ --tx:#f8f6ff;--mut:#b2accd;--ac:#a78bfa;--ac2:#6d5dfc;--acx:#100b24;
+ --bd:rgba(167,139,250,.27);--warn:#ffd27a;--bad:#ff718d;--ok:#55e6d0;
+ --shadow:0 22px 65px rgba(3,2,15,.38);--glow:0 0 38px rgba(167,139,250,.22);--grid:rgba(167,139,250,.075)
+}
+:root[data-theme="light"]{
+ color-scheme:light;--bg:#f7f3ff;--bg2:#eee8ff;--card:rgba(255,255,255,.82);--card2:rgba(248,245,255,.94);
+ --tx:#21183c;--mut:#716786;--ac:#7048df;--ac2:#5030bd;--acx:#fff;
+ --bd:rgba(112,72,223,.2);--warn:#b87512;--bad:#d83e64;--ok:#087f77;
+ --shadow:0 18px 48px rgba(64,42,120,.12);--glow:0 0 32px rgba(112,72,223,.15);--grid:rgba(112,72,223,.065)
+}
+body{
+ background:
+  radial-gradient(ellipse at 12% 8%,rgba(120,82,255,.23),transparent 34%),
+  radial-gradient(ellipse at 88% 20%,rgba(43,222,211,.13),transparent 30%),
+  radial-gradient(ellipse at 55% 88%,rgba(255,105,139,.09),transparent 34%),
+  linear-gradient(135deg,var(--bg),var(--bg2) 58%,var(--bg));
+ background-attachment:fixed
+}
+:root[data-theme="light"] body{
+ background:
+  radial-gradient(ellipse at 8% 5%,rgba(157,123,255,.23),transparent 35%),
+  radial-gradient(ellipse at 92% 18%,rgba(255,135,119,.16),transparent 30%),
+  radial-gradient(ellipse at 55% 90%,rgba(87,207,205,.13),transparent 35%),
+  linear-gradient(135deg,var(--bg),var(--bg2) 58%,#fff9f5);
+ background-attachment:fixed
+}
+body:before{
+ background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+ background-size:58px 58px;opacity:.8;
+ mask-image:linear-gradient(to bottom,black,transparent 88%)
+}
+body:after{
+ content:"";position:fixed;inset:-20%;z-index:-1;pointer-events:none;
+ background:
+  radial-gradient(ellipse at 20% 30%,rgba(142,102,255,.13),transparent 24%),
+  radial-gradient(ellipse at 78% 64%,rgba(48,222,211,.09),transparent 23%),
+  repeating-linear-gradient(122deg,transparent 0 115px,rgba(167,139,250,.035) 116px,transparent 118px 235px);
+ filter:blur(2px);animation:ambientDrift 24s ease-in-out infinite alternate
+}
+@keyframes ambientDrift{from{transform:translate3d(-1.5%, -1%,0) rotate(-1deg)}to{transform:translate3d(1.5%,1%,0) rotate(1deg)}}
+.cinematic-header{isolation:isolate}
+.cinematic-header:before{
+ content:"";position:absolute;right:-110px;top:10px;width:440px;height:440px;border:1px solid color-mix(in srgb,var(--ac) 35%,transparent);
+ border-radius:50%;box-shadow:0 0 0 28px color-mix(in srgb,var(--ac) 4%,transparent),0 0 0 70px color-mix(in srgb,var(--ac) 3%,transparent),inset 0 0 90px color-mix(in srgb,var(--ac) 10%,transparent);
+ pointer-events:none;animation:orbitBreath 8s ease-in-out infinite alternate
+}
+.cinematic-header:after{
+ content:"";position:absolute;right:4%;top:95px;width:min(40vw,460px);height:190px;pointer-events:none;
+ background:linear-gradient(110deg,transparent, color-mix(in srgb,var(--ac) 13%,transparent),color-mix(in srgb,#36dfd0 10%,transparent),transparent);
+ clip-path:polygon(0 72%,18% 63%,38% 65%,55% 18%,76% 10%,100% 24%,100% 28%,75% 17%,57% 25%,40% 72%,18% 70%,0 80%);
+ filter:blur(1px);opacity:.8
+}
+@keyframes orbitBreath{to{transform:rotate(14deg) scale(1.04);opacity:.65}}
+.brandmark{border-color:var(--ac);color:var(--ac);box-shadow:0 0 25px color-mix(in srgb,var(--ac) 28%,transparent),inset 0 0 15px color-mix(in srgb,var(--ac) 12%,transparent)}
+.brandname span,.eyebrow,.hero-kicker{color:var(--ac)}
+.pulse-dot{background:var(--ok);box-shadow:0 0 16px var(--ok)}
+nav{border:1px solid var(--bd);background:color-mix(in srgb,var(--card) 78%,transparent);box-shadow:0 18px 50px rgba(0,0,0,.19),inset 0 1px rgba(255,255,255,.12)}
+:root[data-theme="light"] nav{background:rgba(255,255,255,.76)}
+nav button.on{background:linear-gradient(115deg,var(--ac),#54d9d0);color:#130d2b;border-color:transparent;box-shadow:0 8px 26px color-mix(in srgb,var(--ac) 30%,transparent)}
+.card{border-color:var(--bd);background:linear-gradient(145deg,color-mix(in srgb,var(--card) 95%,transparent),color-mix(in srgb,var(--card2) 91%,transparent));box-shadow:var(--shadow),inset 0 1px rgba(255,255,255,.07)}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow),0 0 28px color-mix(in srgb,var(--ac) 10%,transparent),inset 0 1px rgba(255,255,255,.1)}
+.btn{background:linear-gradient(115deg,var(--ac),#54d9d0 115%);color:#130d2b;box-shadow:0 9px 26px color-mix(in srgb,var(--ac) 23%,transparent)}
+.btn.s{background:color-mix(in srgb,var(--ac) 9%,var(--card));color:var(--ac);border-color:var(--bd)}
+.theme-toggle{background:color-mix(in srgb,var(--card) 85%,transparent);border-color:var(--bd)}
+.theme-toggle:hover{box-shadow:var(--glow)}
+.vehicle-stage{
+ border-color:color-mix(in srgb,var(--ac) 38%,var(--bd));
+ background:
+  radial-gradient(ellipse at 50% 75%,color-mix(in srgb,var(--ac) 27%,transparent),transparent 55%),
+  radial-gradient(ellipse at 82% 20%,rgba(53,218,206,.13),transparent 35%),
+  linear-gradient(145deg,var(--bg2),var(--card2));
+ box-shadow:inset 0 0 70px color-mix(in srgb,var(--ac) 8%,transparent),0 15px 40px rgba(0,0,0,.12)
+}
+.vehicle-stage:before{opacity:.8}
+.vehicle-stage:after{background:linear-gradient(90deg,var(--ac),#54d9d0)}
+.vehicle-photo{filter:drop-shadow(0 30px 26px rgba(0,0,0,.45)) drop-shadow(0 0 30px color-mix(in srgb,var(--ac) 22%,transparent))}
+.vehicle-specs span{color:var(--ac);background:color-mix(in srgb,var(--ac) 7%,transparent)}
+#gar .card:first-child{background:linear-gradient(125deg,color-mix(in srgb,var(--ac) 10%,var(--card)),color-mix(in srgb,#36dcca 5%,var(--card)) 50%,var(--card))}
+.evbuddy-avatar{background:linear-gradient(145deg,var(--ac),#54d9d0);color:#130d2b}
+.emergency-link strong{color:var(--ac)}
+.chip:hover{background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+a{color:var(--ac)}
+:root[data-theme="light"] .m.u{background:linear-gradient(115deg,var(--ac),#54d9d0);color:#130d2b}
+:root[data-theme="light"] .vehicle-stage{box-shadow:inset 0 0 65px rgba(112,72,223,.08),0 12px 34px rgba(64,42,120,.09)}
+@media(max-width:700px){.cinematic-header:before{width:270px;height:270px;right:-130px;top:30px}.cinematic-header:after{right:-12%;top:115px;width:75vw;opacity:.48}}
+@media(prefers-reduced-motion:reduce){body:after,.cinematic-header:before{animation:none}}
+
 </style>
 </head>
 <body>
