@@ -338,7 +338,7 @@ a{color:var(--ac)}
 @media(max-width:700px){.evbuddy-launcher-wrap{right:15px;bottom:15px}.evbuddy-launcher{width:60px;height:60px;border-radius:20px}.buddy-hint{display:none}.evbuddy-panel{right:10px;bottom:85px;width:calc(100vw - 20px);max-height:calc(100dvh - 105px)}.auto-atmosphere{opacity:.48}}
 @media(prefers-reduced-motion:reduce){.evbuddy-panel.open{animation:none}.evbuddy-launcher{transition:none}}
 \n
-/* SCROLL RECOVERY: keep the document and active section in normal page flow */
+/* FULL-PAGE MODE: show every dashboard section in the document so users can scroll naturally. */
 html, body {
   height: auto !important;
   min-height: 100% !important;
@@ -353,6 +353,7 @@ header, nav, main, section, section.on {
 main, section.on { overflow: visible !important; }
 section.on { min-height: 1px; }
 .reveal { opacity: 1 !important; transform: none !important; }
+section, section.on { display: block !important; }
 
 </style>
 </head>
@@ -616,7 +617,7 @@ const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",
 /* Tabs */
 const TABS=[["gar","My garage"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
 $("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
-function show(id){document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===id));document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id))}
+function show(id){document.querySelectorAll("nav button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));const target=document.getElementById(id);if(target)target.scrollIntoView({behavior:"smooth",block:"start"})}
 $("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
 
 /* Common issues */
