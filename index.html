@@ -375,6 +375,11 @@ section.on { min-height: 1px; }
 @media(max-width:560px){#tabs{width:calc(100% - 18px);gap:5px;padding:6px}#tabs button{padding:10px 7px;font-size:10px}}
 
 /* Tab mode: show only the selected dashboard panel. */
+main > section[hidden]{display:none!important}
+main > section.on:not([hidden]){display:block!important}
+#tabs{isolation:isolate}
+#tabs button:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+@media(max-width:560px){#tabs{overflow-x:auto;scrollbar-width:none}#tabs::-webkit-scrollbar{display:none}#tabs button{flex:1 0 auto;min-width:calc((100% - 18px)/4)}}
 
 </style>
 </head>
@@ -401,7 +406,7 @@ section.on { min-height: 1px; }
     <div class="hero-copy"><div class="eyebrow">THE EVOLUTION OWNER EXPERIENCE</div><h1>YOUR DRIVE.<br><span>YOUR WORLD.</span></h1><p>A considered ownership experience. Your vehicle, care schedule and support — all in one place.</p><div class="hero-kicker"><span class="pulse-dot"></span> CONNECTED OWNERSHIP · SRI LANKA</div></div>
   </div>
 </header>
-<nav id="tabs"></nav>
+<nav id="tabs" aria-label="Owner dashboard navigation"></nav>
 <main>
 <section id="gar">
   <div class="card">
@@ -635,11 +640,42 @@ $("resetVehicle").addEventListener("click",()=>{$("vm").value="";$("customModel"
 const store={get(k,d){try{const v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v));return true}catch(e){return false}}};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 
-/* Tabs */
-const TABS=[["gar","My garage"],["faq","Vehicle care"],["chg","Charging"],["emergency","Emergency"]];
-$("tabs").innerHTML=TABS.map(t=>`<button data-t="${t[0]}">${t[1]}</button>`).join("");
-function show(id){document.querySelectorAll("main > section").forEach(panel=>panel.classList.toggle("on",panel.id===id));document.querySelectorAll("#tabs button").forEach(b=>b.classList.toggle("on",b.dataset.t===id));window.scrollTo({top:0,behavior:"smooth"})}
-$("tabs").onclick=e=>{const t=e.target.dataset.t;if(t)show(t)};show("gar");
+/* Accessible glass tab navigation — EV Buddy remains in its separate floating launcher. */
+const TABS=[["gar","My Garage"],["faq","Vehicle Care"],["chg","Charging"],["emergency","Emergency"]];
+const tabsNav=$("tabs");
+tabsNav.setAttribute("aria-label","Owner dashboard navigation");
+tabsNav.setAttribute("role","tablist");
+tabsNav.innerHTML=TABS.map(([id,label],i)=>`<button type="button" role="tab" id="tab-${id}" aria-controls="${id}" aria-selected="${i===0}" tabindex="${i===0?0:-1}" data-t="${id}" class="${i===0?"on":""}>${label}</button>`).join("");
+function show(id,moveFocus=false){
+  if(!TABS.some(([tabId])=>tabId===id))id="gar";
+  document.querySelectorAll("main > section").forEach(panel=>{
+    const active=panel.id===id;
+    panel.classList.toggle("on",active);
+    panel.hidden=!active;
+    panel.setAttribute("aria-hidden",String(!active));
+  });
+  tabsNav.querySelectorAll('[role="tab"]').forEach(button=>{
+    const active=button.dataset.t===id;
+    button.classList.toggle("on",active);
+    button.setAttribute("aria-selected",String(active));
+    button.tabIndex=active?0:-1;
+    if(active&&moveFocus)button.focus({preventScroll:true});
+  });
+  if(window.scrollY>tabsNav.getBoundingClientRect().top+window.scrollY-16)
+    window.scrollTo({top:Math.max(0,tabsNav.getBoundingClientRect().top+window.scrollY-16),behavior:"smooth"});
+}
+tabsNav.addEventListener("click",e=>{
+  const button=e.target.closest("button[data-t]");
+  if(button&&tabsNav.contains(button))show(button.dataset.t);
+});
+tabsNav.addEventListener("keydown",e=>{
+  if(!["ArrowLeft","ArrowRight","Home","End"].includes(e.key))return;
+  const buttons=[...tabsNav.querySelectorAll('[role="tab"]')];
+  const current=buttons.indexOf(document.activeElement);
+  const next=e.key==="Home"?0:e.key==="End"?buttons.length-1:(current+(e.key==="ArrowRight"?1:-1)+buttons.length)%buttons.length;
+  e.preventDefault();show(buttons[next].dataset.t,true);
+});
+show("gar");
 
 /* Common issues */
 const FAQ=[
